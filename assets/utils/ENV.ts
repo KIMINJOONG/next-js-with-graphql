@@ -1,0 +1,1 @@
+export const GQL_DOMAIN = process.env.GQL_DOMAIN as string;

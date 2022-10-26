@@ -1,7 +1,10 @@
 import { gql } from "@apollo/client";
+import { DocumentNode, NameNode, OperationDefinitionNode } from "graphql";
 import Head from "next/head";
 import Image from "next/image";
-import client from "../components/apollo-client";
+import client from "../assets/apis/apolloClient";
+import axiosInstance from "../assets/apis/axiosInstance";
+import { GQL_DOMAIN } from "../assets/utils/ENV";
 import styles from "../styles/Home.module.css";
 
 const Home = ({ countries }: any) => {
@@ -43,18 +46,41 @@ const Home = ({ countries }: any) => {
 
 // getStaticProps 함수는, React 컴포넌트가 실행되기 전에 실행된다!
 export const getStaticProps = async () => {
+  const query = `
+    query Countries {
+      countries {
+        code
+        name
+        emoji
+      }
+    }
+  `;
+
+  const gqlQuery = gql`
+    ${query}
+  `
   // apollo에 연결된 graphql쿼리문 사용하고, 데이터 불러오기
   const { data } = await client.query({
-    query: gql`
-      query Countries {
-        countries {
-          code
-          name
-          emoji
-        }
-      }
-    `,
+    query: gqlQuery,
   });
+
+  // axois call
+  // innerQuery 는 쿼리의 오브젝트 명을 추출하기 위함
+  const innerQuery = gqlQuery.definitions[0] as OperationDefinitionNode;
+  const { value } = innerQuery.name as NameNode;
+
+  axiosInstance(value)
+        .post(`${GQL_DOMAIN}`, {
+            query: query,
+            // variables: {
+            //     idx
+            // }
+        })
+        .then(res => {
+          // console.log(res.data.data['countries'])
+          // 추출한 쿼리의 오브젝트 이름을 value로 넣어 실질적 안에 있는 데이터를 가져옴
+          // console.log(res.data.data[value])
+        });
 
   // Home의 props로 data 보내주기
   return {
