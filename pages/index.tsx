@@ -65,7 +65,7 @@ export const getStaticProps = async () => {
   });
 
   // axois call
-  // innerQuery 는 쿼리의 오브젝트 명을 추출하기 위함
+  // innerQuery 는 쿼리의 오브젝트 명을 추출하기 위함 해당 부분은 리프레쉬 토큰 처리를 위해 인터셉터에서 사용하기위해 추출했었음
   const innerQuery = gqlQuery.definitions[0] as OperationDefinitionNode;
   const { value } = innerQuery.name as NameNode;
 

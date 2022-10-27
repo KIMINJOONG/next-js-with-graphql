@@ -22,6 +22,7 @@ const interceptor = (value:string) => {
         }
     );
 
+    // refresh token 처리를 위해 쿼리 명을 받아와야함
     // axiosApiInstance.interceptors.response.use(
     //     async response => {
     //       if(response.data.data[value].status === 201){
