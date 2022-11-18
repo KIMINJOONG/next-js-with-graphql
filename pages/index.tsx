@@ -5,15 +5,18 @@ import Image from "next/image";
 import client from "../assets/apis/apolloClient";
 import axiosInstance from "../assets/apis/axiosInstance";
 import { GQL_DOMAIN } from "../assets/utils/ENV";
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import styles from "../styles/Home.module.css";
 
 
 const Home = ({ countries }: any) => {
   return (
-    <div>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
 
       <Header />
+      <div style={{ flex: 1, }}></div>
+      <Footer />
     </div>
   );
 };
