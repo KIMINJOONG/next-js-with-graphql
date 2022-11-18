@@ -15,9 +15,22 @@ const Home = ({ countries }: any) => {
     <div style={{ display: 'flex', flexDirection: 'column' }}>
 
       <Header />
-      <div style={{ flex: 1, }}></div>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div style={{ backgroundColor: '#F8F8F8', display: 'flex', flexDirection: 'row', height: 699 }}>
+          <div style={{ flex: 1, border: '1px solid black' }}></div>
+          <div style={{ paddingTop: 160, border: '1px solid black' }}>
+            <p style={{ fontSize: 50, fontWeight: 600 }}>문화를 통해 공간을</p>
+            <p style={{ fontSize: 50, fontWeight: 600 }}>재생하다.</p>
+          </div>
+          <div style={{ flex: 1, border: '1px solid black' }}></div>
+          <div style={{ flex: 1, border: '1px solid black' }}></div>
+          <div style={{ flex: 1, border: '1px solid black' }}></div>
+
+        </div>
+
+      </div>
       <Footer />
-    </div>
+    </div >
   );
 };
 
