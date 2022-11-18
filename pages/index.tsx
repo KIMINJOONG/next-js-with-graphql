@@ -16,15 +16,24 @@ const Home = ({ countries }: any) => {
 
       <Header />
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <div style={{ backgroundColor: '#F8F8F8', display: 'flex', flexDirection: 'row', height: 699 }}>
+        <div style={{ backgroundColor: '#F8F8F8', display: 'flex', flexDirection: 'row', height: 699, overflow: 'hidden', }}>
           <div style={{ flex: 1, border: '1px solid black' }}></div>
           <div style={{ paddingTop: 160, border: '1px solid black' }}>
             <p style={{ fontSize: 50, fontWeight: 600 }}>문화를 통해 공간을</p>
             <p style={{ fontSize: 50, fontWeight: 600 }}>재생하다.</p>
           </div>
-          <div style={{ flex: 1, border: '1px solid black' }}></div>
-          <div style={{ flex: 1, border: '1px solid black' }}></div>
-          <div style={{ flex: 1, border: '1px solid black' }}></div>
+          <div style={{ flex: 1, border: '1px solid black', position: 'relative' }}>
+            <div style={{ position: 'absolute', top: -55, left: -40 }}>
+              <Image className="img" src={require('../assets/images/main_text.png')} alt={'main_text'} width={254} height={259} />
+            </div>
+          </div>
+          <div style={{ flex: 1, border: '1px solid black', position: 'relative' }}>
+            <div style={{ position: 'absolute', top: 92, right: -93, padding: '13px 121px 14px 36px', backgroundColor: '#F6C42D', transform: 'rotate(90deg)' }}>
+              <span>NABILERA</span>
+            </div>
+          </div>
+          <div style={{ flex: 1, border: '1px solid black' }}>
+          </div>
 
         </div>
 
