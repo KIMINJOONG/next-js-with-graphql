@@ -15,12 +15,21 @@ const Home = ({ countries }: any) => {
     <div style={{ display: 'flex', flexDirection: 'column' }}>
 
       <Header />
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <div style={{ backgroundColor: '#F8F8F8', display: 'flex', flexDirection: 'row', height: 699, overflow: 'hidden', }}>
+      <div style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'scroll' }}>
+        <div style={{ backgroundColor: '#F8F8F8', display: 'flex', flexDirection: 'row', height: 699 }}>
           <div style={{ flex: 1, border: '1px solid black' }}></div>
           <div style={{ paddingTop: 160, border: '1px solid black' }}>
-            <p style={{ fontSize: 50, fontWeight: 600 }}>문화를 통해 공간을</p>
-            <p style={{ fontSize: 50, fontWeight: 600 }}>재생하다.</p>
+            <div>
+              <p style={{ fontSize: 50, fontWeight: 600 }}>문화를 통해 공간을</p>
+              <p style={{ fontSize: 50, fontWeight: 600 }}>재생하다.</p>
+            </div>
+            {/* <div style={{ marginTop: 28 }}>
+              <p style={{ fontSize: 18, fontWeight: 300 }}>지역 역사와 문화의 고유한 가치를 콘텐츠로 개발하여</p>
+              <p style={{ fontSize: 18, fontWeight: 300 }}>지역사회의 가치를 상승시키고 시민들의 삶의 질을 높이고자 합니다.</p>
+            </div> */}
+            <div style={{ marginTop: 66 }}>
+              <Image src={require('../assets/images/main.png')} alt={'main'} width={900} height={438} />
+            </div>
           </div>
           <div style={{ flex: 1, border: '1px solid black', position: 'relative' }}>
             <div style={{ position: 'absolute', top: -55, left: -40 }}>
