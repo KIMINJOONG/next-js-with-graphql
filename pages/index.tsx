@@ -2,6 +2,7 @@ import { gql } from "@apollo/client";
 import { DocumentNode, NameNode, OperationDefinitionNode } from "graphql";
 import Head from "next/head";
 import Image from "next/image";
+import { color } from "styles/theme";
 import client from "../assets/apis/apolloClient";
 import axiosInstance from "../assets/apis/axiosInstance";
 import { GQL_DOMAIN } from "../assets/utils/ENV";
@@ -37,7 +38,7 @@ const Home = ({ countries }: any) => {
             </div>
           </div>
           <div style={{ flex: 1, border: '1px solid black', position: 'relative' }}>
-            <div style={{ position: 'absolute', top: 92, right: -93, padding: '13px 121px 14px 36px', backgroundColor: '#F6C42D', transform: 'rotate(90deg)' }}>
+            <div style={{ position: 'absolute', top: 152, right: -93, padding: '13px 121px 14px 36px', backgroundColor: color.brand, transform: 'rotate(90deg)' }}>
               <span>NABILERA</span>
             </div>
           </div>

@@ -40,8 +40,8 @@ export const GlobalStyle = createGlobalStyle`
         }
 
         body {
-            color: ${color.N0};
-            background: black;
+            color: ${color.N60};
+            background: ${color.N0};
         }
     }
 
