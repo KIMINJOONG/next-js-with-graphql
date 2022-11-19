@@ -17,13 +17,59 @@ export const HeaderContainer = styled.nav`
             display: flex;
             height: 100%;
             align-items: center;
-            ul {
+            .menus {
                 display: flex;
+                height: 100%;
                 flex: 1;
                 flex-direction: row;
                 justify-content: flex-end;
                 align-items: center;
-                color: ${color.N40};
+                .menu-item {
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    height: 100%;
+                    margin-right: 36px;
+                    .menu-href {
+                        color: ${color.N40};
+                    }
+                }
+                .menu-item:last-child {
+                    margin-right: 0;
+                }
+                .hover-active {
+                    position: relative;
+                    &:hover {
+                        .dropdown-content {
+                            display : block;
+                        }
+                    }
+                    .dropdown-content {
+                        display: none;
+                        > ul {
+                            position: absolute;
+                            top: 60px;
+                            left: 0;
+                            min-width: 300px;
+                            display: flex;
+                            height: 60px;
+                            align-items: center;
+                            > li {
+                                margin-right: 40px;
+                                color: ${color.N30}
+                            }
+                        }
+                        .dropdown-background {
+                            position: fixed;
+                            top: 60px;
+                            height: 60px;
+                            left: 0;
+                            width: 100%;
+                            background: ${color.N0};
+                            border-bottom: solid 1px ${color.N50};
+                        }
+                    }
+                }
             }
         }
     }
