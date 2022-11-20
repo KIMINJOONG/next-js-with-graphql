@@ -59,7 +59,7 @@ const MainSectionBottom = styled.section`
   background-image: url('images/main_bottom_background.png');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: 67%;
 `;
 
 const Home = ({ countries }: any) => {
