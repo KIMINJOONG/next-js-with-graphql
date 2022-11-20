@@ -8,6 +8,17 @@ export const GlobalStyle = createGlobalStyle`
     font-family: Pretendard;
     }
 
+    /* width */
+    ::-webkit-scrollbar {
+        width: 13px;
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: ${color.brand}; 
+        border-radius: 26px;
+    }
+
     h1 {
        font-weight: 600;
        color: ${color.N55};

@@ -8,6 +8,11 @@ import { createTheme } from "@mui/material/styles";
 import { color } from "styles/theme";
 
 const themeLight = createTheme({
+  typography: {
+    fontFamily: [
+      'Pretendard',
+    ].join(','),
+  },
   palette: {
     background: {
       default: color.N0,
