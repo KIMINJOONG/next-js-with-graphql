@@ -31,7 +31,7 @@ const NewsScreen = () => {
 
     return <Fragment>
         <HeadMeta title={`나빌레라 : 뉴스`} />
-        <Header />
+        <Header type={2} />
         <NewsContainer>
             <h1>
                 <span>
@@ -68,7 +68,7 @@ const NewsScreen = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
-                            <TableRow onClick={() => router.push('/news/detail?type=2&id=1')}>
+                            <TableRow onClick={() => router.push('/news/detail?id=1')}>
                                 <TableCell className="table-body-cell index">
                                     20
                                 </TableCell>

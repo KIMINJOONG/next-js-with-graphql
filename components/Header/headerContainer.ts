@@ -55,8 +55,11 @@ export const HeaderContainer = styled.nav`
                             height: 60px;
                             align-items: center;
                             > li {
-                                margin-right: 40px;
-                                color: ${color.N30}
+                                height:100%;
+                                padding-right: 40px;
+                                color: ${color.N30};
+                                display: flex;
+                                align-items: center;
                             }
                         }
                         .dropdown-background {

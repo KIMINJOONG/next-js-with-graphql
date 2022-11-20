@@ -152,7 +152,7 @@ const ProjectScreen = ({ query = {}, params = {} }: IProps) => {
 
     return <Fragment>
         <HeadMeta title={`나빌레라 : ${tabs[tab - 1]}`} />
-        <Header />
+        <Header type={1} />
         <ProjectContainer>
             <h1>
                 <span>

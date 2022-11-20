@@ -1,7 +1,8 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import Image from 'next/image'
 import Link from "next/link";
 import { HeaderContainer } from "./headerContainer";
+import { useRouter } from "next/router";
 
 const MENUS = [
     {
@@ -24,8 +25,22 @@ const MENUS = [
     }
 ]
 
+interface IHeader {
+    type?: number
+}
 
-const Header = () => {
+
+const Header = (props: IHeader) => {
+    const router = useRouter()
+    const onClickMenu = (e: React.MouseEvent<HTMLLIElement, globalThis.MouseEvent>, href: string) => {
+        const taget = e.target as HTMLElement;
+        if (taget.className === 'dropdown-background') {
+            return
+        }
+        e.stopPropagation();
+        router.push(href)
+    }
+
     return (
         <HeaderContainer>
             <div className="header-inner">
@@ -35,20 +50,20 @@ const Header = () => {
                     </Link>
                     <ul className="menus">
                         {MENUS.map((menu, index) => (
-                            <li key={menu.id} className={`menu-item ${menu.hover}`}>
-                                <Link className="menu-href" href={menu.href}>
+                            <li key={menu.id} className={`menu-item ${menu.hover}`} onClick={(e) => onClickMenu(e, menu.href)}>
+                                <a className="menu-href">
                                     <span style={{ fontSize: 15, fontWeight: 500, }}>{menu.name}</span>
-                                </Link>
+                                </a>
                                 {menu.hover && <div className="dropdown-content">
                                     <div className="dropdown-background" />
                                     <ul>
-                                        <li>
+                                        <li onClick={(e) => onClickMenu(e, '/project?type=1')}>
                                             공연
                                         </li>
-                                        <li>
+                                        <li onClick={(e) => onClickMenu(e, '/project?type=2')}>
                                             축제 및 행사
                                         </li>
-                                        <li>
+                                        <li onClick={(e) => onClickMenu(e, '/project?type=3')}>
                                             극장
                                         </li>
                                     </ul>
