@@ -22,6 +22,7 @@ export const color = {
   //typo color
   N0: '#ffffff',
   N5: '#F5F5F5',
+  N10: '#F0F0F0',
   N15: '#C5C5C5',
   N20: '#D9D9D9',
   N25: '#AAAAAA',

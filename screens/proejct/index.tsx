@@ -1,8 +1,10 @@
 import Footer from "components/Footer"
 import Header from "components/Header"
+import HeadMeta from "components/Header/HeadMeta"
+import Head from "next/head"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { Fragment, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { ProjectContainer } from "./style"
 
 const tabs = ['공연', '축제 및 행사', '극장']
@@ -140,11 +142,16 @@ const ProjectScreen = ({ query = {}, params = {} }: IProps) => {
     const [tab, setTab] = useState<number>(query.type ? Number(query.type) : 1)
 
     const onClickTab = (tab: number) => {
-        setTab(tab)
+
         router.push(`/project?type=${tab}`)
     }
 
+    useEffect(() => {
+        setTab(Number(query.type))
+    }, [query.type])
+
     return <Fragment>
+        <HeadMeta title={`나빌레라 : ${tabs[tab - 1]}`} />
         <Header />
         <ProjectContainer>
             <h1>
