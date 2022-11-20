@@ -57,8 +57,9 @@ const news = [
 const MainSectionBottom = styled.section`
   height: 394px;
   background-image: url('images/main_bottom_background.png');
-  background-size: 100%;
   background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 `;
 
 const Home = ({ countries }: any) => {
