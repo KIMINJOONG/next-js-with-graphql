@@ -5,10 +5,20 @@ export const GlobalStyle = createGlobalStyle`
     html, body {
     padding: 0;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: Pretendard;
     }
 
+    h1 {
+       font-weight: 600;
+       color: ${color.N55};
+       font-size: 50px;
+    }
+
+    h2 {
+        font-weight: 600;
+        color: ${color.N55};
+        font-size: 22px;
+    }
     a {
         color: inherit;
         text-decoration: none;

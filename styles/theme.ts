@@ -22,10 +22,17 @@ export const color = {
   //typo color
   N0: '#ffffff',
   N5: '#F5F5F5',
+  N15: '#C5C5C5',
   N20: '#D9D9D9',
+  N25: '#AAAAAA',
   N30: '#5A544B',
   N40: '#3F3D3C',
   N50: '#292825',
   N55: '#1F1E1D',
   N60: '#181817',
 };
+
+
+export const size = {
+  container: 1100
+}
