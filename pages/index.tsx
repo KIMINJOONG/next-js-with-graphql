@@ -2,6 +2,7 @@ import { gql } from "@apollo/client";
 import { DocumentNode, NameNode, OperationDefinitionNode } from "graphql";
 import Head from "next/head";
 import Image from "next/image";
+import styled from "styled-components";
 import { color } from "styles/theme";
 import client from "../assets/apis/apolloClient";
 import axiosInstance from "../assets/apis/axiosInstance";
@@ -9,7 +10,56 @@ import { GQL_DOMAIN } from "../assets/utils/ENV";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import styles from "../styles/Home.module.css";
+import MainBottomBackgroundImage from '../assets/images/main_bottom_background.png';
 
+const year2022 = [
+  '골목축제 ‘골목대장 히어로’ 기획 및 운영',
+  '5~11월 꿈다락 토요문화학교 ‘애들아 역사탈출할래’ 기획 및 운영',
+  '청소년 웹드라마 제작단 운영',
+  '연극 봉사단 운영',
+];
+const year2021 = [
+  '2월 협동조합 나빌레라 설립',
+  '4~6월 홍성역사인물축제 온라인 콘텐츠 기획 및 운영',
+  '5월 ‘이번 정류장은 홍성’ 웹드라마 기획 및 제작',
+  '5~11월 꿈다락 토요문화학교 ‘애들아 역사탈출할래’ 기획 및 운영',
+  '스토리형 미션 프로그램 ‘추억을 훔쳐간 범인을 찾아라’ 기획 및 운영',
+  '이응노의 집 ‘시끌벅적 내 맘대로 군상’ 예술교육프로그램 연합 운영',
+  '‘나도 영화감독’ 청소년영화교육프로그램 운영',
+  '장소특정형 연극 ‘해어화 만향’ 제작',
+  '지역설화로 만든 ‘별의 아이’ 아동극 제작'
+];
+
+const news = [
+  {
+    title: '[춘천사람들] [취재기자 현장 인터뷰] (사)강원살이 청년이 행복한 춘천을 꿈꾼다',
+    date: '2022.11.10'
+  },
+
+  {
+    title: '[춘천사람들] 춘천시 첫 명예청년청장 선출',
+    date: '2022.11.10'
+  },
+  {
+    title: '귀뚜라미 먹방 올린다고?...사경지원기관의 파격 변화',
+    date: '2022.11.10'
+  },
+  {
+    title: '[잡포스트] 춘천문화재단, 전국 문화예술계 종사자 대규모 비대면 온라인 라운드테이블 개최',
+    date: '2022.11.10'
+  },
+  {
+    title: '[춘천사람들] 지역 문화·예술계, 코로나19에 \'휘청\'',
+    date: '2022.11.10'
+  }
+
+]
+
+const MainSectionBottom = styled.section`
+  width: 100%;
+  height: 394px;
+  background-image: url(${MainBottomBackgroundImage});
+`;
 
 const Home = ({ countries }: any) => {
   return (
@@ -48,17 +98,23 @@ const Home = ({ countries }: any) => {
 
         </section>
         <section style={{ height: 679 }}>
-          <div style={{ maxWidth: '1100px', margin: 'auto', display: 'flex', flexDirection: 'row', position: 'relative', }}>
+          <div style={{ maxWidth: '1100px', margin: 'auto', display: 'flex', flexDirection: 'row', position: 'relative', height: 679 }}>
             <div style={{ marginTop: 288 }}>
               <Image src={require('../assets/images/main_news.png')} alt={'main'} style={{ width: '367px', height: '477px' }} />
             </div>
             <div style={{ marginLeft: 92, marginTop: 304, flex: 1 }}>
-              <h2 style={{ fontSize: 50 }}>News</h2>
-              <ul style={{ marginTop: 31 }}>
-                <li style={{ display: 'flex', flexDirection: 'row', paddingBottom: 15, borderBottomWidth: 1, borderBottomColor: 'black', borderBottomStyle: 'solid' }}>
-                  <p style={{ flex: 1, fontSize: 15 }}>[춘천사람들] [취재기자 현장 인터뷰] (사)강원살이 청년이 행복한 춘천을 꿈꾼다</p>
-                  <p style={{ fontSize: 14 }}>2022.11.10</p>
-                </li>
+              <span style={{ fontSize: 50 }}>News</span>
+              <ul style={{ marginTop: 33 }}>
+                {
+                  news.map((item, index) => (
+                    <li style={{ display: 'flex', flexDirection: 'row', paddingTop: index === 0 ? 0 : 15, paddingBottom: 15, borderBottomWidth: 1, borderBottomColor: 'black', borderBottomStyle: 'solid' }}>
+
+                      <p style={{ flex: 1, fontSize: 15 }}>{item.title}</p>
+                      <p style={{ fontSize: 14 }}>{item.date}</p>
+                    </li>
+                  ))
+                }
+
               </ul>
             </div>
           </div>
@@ -106,19 +162,39 @@ const Home = ({ countries }: any) => {
             </div>
           </div>
         </section>
-        <section style={{ backgroundColor: 'white', paddingTop: 106, paddingBottom: 40 }}>
+        <section style={{ backgroundColor: color.N0, paddingTop: 106, paddingBottom: 40 }}>
           <div style={{ maxWidth: 1100, margin: 'auto', }}>
             <div>
               <h2 style={{ fontSize: 50 }}>History</h2>
               <div style={{ display: 'flex', flexDirection: 'row', marginTop: 103, borderTop: '1px solid black', padding: '30px 0px 30px 0px' }}>
-                <div>
-                  <span style={{ fontSize: 35 }}>2022</span>
+                <div style={{ paddingLeft: 91 }}>
+                  <span style={{ fontSize: 35, fontWeight: 700 }}>2022</span>
                 </div>
                 <div style={{ marginLeft: 182, flex: 1 }}>
-                  <ul style={{ listStyleType: 'circle' }}>
-                    <li>
-                      <span>dasd</span>
-                    </li>
+                  <ul>
+                    {
+                      year2022.map((item, index) => (
+                        <li style={{ marginTop: index === 0 ? 0 : 15, listStyle: 'initial', listStyleType: 'disc' }}>
+                          <span>{item}</span>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </div>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'row', borderTop: '1px solid black', padding: '30px 0px 30px 0px' }}>
+                <div style={{ paddingLeft: 91 }}>
+                  <span style={{ fontSize: 35, fontWeight: 700 }}>2021</span>
+                </div>
+                <div style={{ marginLeft: 182, flex: 1 }}>
+                  <ul>
+                    {
+                      year2021.map((item, index) => (
+                        <li style={{ marginTop: index === 0 ? 0 : 15, listStyle: 'initial', listStyleType: 'disc' }}>
+                          <span>{item}</span>
+                        </li>
+                      ))
+                    }
                   </ul>
                 </div>
               </div>
@@ -126,6 +202,49 @@ const Home = ({ countries }: any) => {
 
           </div>
         </section>
+        <MainSectionBottom background={MainBottomBackgroundImage}>
+          <div style={{ display: 'flex', flexDirection: 'row', maxWidth: 1100, margin: 'auto', padding: '76px 0px 68px 0px' }}>
+            <div>
+              <span style={{ fontSize: 45, fontWeight: 700 }}>Contact us !</span>
+            </div>
+            <div style={{ marginLeft: 92, paddingTop: 190, display: 'flex', flexDirection: 'row', }}>
+              <div>
+                <span style={{ fontSize: 18, fontWeight: 600 }}>Address</span>
+                <div style={{ marginTop: 14 }}>
+                  <span style={{ fontSize: 13, fontWeight: 400 }}>Hongseong. Korea</span>
+                </div>
+              </div>
+              <div style={{ marginLeft: 56 }}>
+                <span style={{ fontSize: 18, fontWeight: 600 }}>Email</span>
+                <div style={{ marginTop: 14 }}>
+                  <span style={{ fontSize: 13, fontWeight: 400 }}>nabilera2020@naver.com</span>
+                </div>
+              </div>
+              <div style={{ marginLeft: 56 }}>
+                <span style={{ fontSize: 18, fontWeight: 600 }}>Tel</span>
+                <div style={{ marginTop: 14 }}>
+                  <span style={{ fontSize: 13, fontWeight: 400 }}>041-406-8998</span>
+                </div>
+              </div>
+              <div style={{ marginLeft: 56 }}>
+                <span style={{ fontSize: 18, fontWeight: 600 }}>SNS</span>
+                <div style={{ marginTop: 14 }}>
+                  <span style={{ fontSize: 13, fontWeight: 400 }}>Instagram</span>
+                </div>
+                <div style={{ marginTop: 12 }}>
+                  <span style={{ fontSize: 13, fontWeight: 400 }}>Facebook</span>
+                </div>
+                <div style={{ marginTop: 12 }}>
+                  <span style={{ fontSize: 13, fontWeight: 400 }}>Blog</span>
+                </div>
+                <div style={{ marginTop: 12 }}>
+                  <span style={{ fontSize: 13, fontWeight: 400 }}>Youtube</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </MainSectionBottom>
       </div>
       <Footer />
     </div >
