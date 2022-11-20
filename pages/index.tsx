@@ -10,7 +10,6 @@ import { GQL_DOMAIN } from "../assets/utils/ENV";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import styles from "../styles/Home.module.css";
-import MainBottomBackgroundImage from '../assets/images/main_bottom_background.png';
 
 const year2022 = [
   '골목축제 ‘골목대장 히어로’ 기획 및 운영',
@@ -56,9 +55,10 @@ const news = [
 ]
 
 const MainSectionBottom = styled.section`
-  width: 100%;
   height: 394px;
-  background-image: url(${MainBottomBackgroundImage});
+  background-image: url('images/main_bottom_background.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
 `;
 
 const Home = ({ countries }: any) => {
@@ -202,12 +202,12 @@ const Home = ({ countries }: any) => {
 
           </div>
         </section>
-        <MainSectionBottom background={MainBottomBackgroundImage}>
+        <MainSectionBottom>
           <div style={{ display: 'flex', flexDirection: 'row', maxWidth: 1100, margin: 'auto', padding: '76px 0px 68px 0px' }}>
             <div>
               <span style={{ fontSize: 45, fontWeight: 700 }}>Contact us !</span>
             </div>
-            <div style={{ marginLeft: 92, paddingTop: 190, display: 'flex', flexDirection: 'row', }}>
+            <div style={{ marginLeft: 92, paddingTop: 114, display: 'flex', flexDirection: 'row', }}>
               <div>
                 <span style={{ fontSize: 18, fontWeight: 600 }}>Address</span>
                 <div style={{ marginTop: 14 }}>
