@@ -18,7 +18,7 @@ export const ProjectContainer = styled.div`
                 height:61px;
                 border-top-right-radius:100%;
                 background: ${color.brand};
-                top: -22px;
+                top: -20px;
                 right: -36px;
                 z-index: -1;
             }

@@ -10,7 +10,7 @@ const NewsDetail = () => {
     const router = useRouter()
     return <Fragment>
         <HeadMeta title={`나빌레라 : 제목`} />
-        <Header />
+        <Header type={2} />
         <DetailContainer>
             <h1>
                 <span>
