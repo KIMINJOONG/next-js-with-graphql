@@ -70,22 +70,28 @@ const Home = ({ countries }: any) => {
       <div style={{ display: 'flex', flexDirection: 'column', overflow: 'scroll', paddingTop: 60, backgroundColor: 'white', }}>
         <section style={{ backgroundColor: '#F8F8F8', height: 699, }}>
           <div style={{ maxWidth: '1100px', margin: 'auto', position: 'relative' }}>
-            <div style={{ paddingTop: 160, }}>
+            <div style={{ zIndex: 1 }}>
+              <hr style={{ left: '0%', height: 'calc(100% - 4px)', border: '1px solid #F0F0F0', position: 'absolute' }} />
+              <hr style={{ left: '33.6%', height: 'calc(100% - 4px)', border: '1px solid #F0F0F0', position: 'absolute' }} />
+              <hr style={{ left: '70.2%', height: 'calc(100% - 4px)', border: '1px solid #F0F0F0', position: 'absolute' }} />
+              <hr style={{ left: '100%', height: 'calc(100% - 4px)', border: '1px solid #F0F0F0', position: 'absolute' }} />
+            </div>
+            <div style={{ paddingTop: 160, zIndex: 2, position: 'relative', }}>
               <div>
                 <p style={{ fontSize: 50, fontWeight: 600 }}>문화를 통해 공간을</p>
                 <p style={{ fontSize: 50, fontWeight: 600 }}>재생하다.</p>
               </div>
               <div style={{ marginTop: 28 }}>
-                <p>지역 역사와 문화의 고유한 가치를 콘텐츠로 개발하여</p>
-                <p>지역사회의 가치를 상승시키고 시민들의 삶의 질을 높이고자 합니다.</p>
+                <p style={{ fontWeight: 300, fontSize: 18 }}>지역 역사와 문화의 고유한 가치를 콘텐츠로 개발하여</p>
+                <p style={{ fontWeight: 300, fontSize: 18 }}>지역사회의 가치를 상승시키고 시민들의 삶의 질을 높이고자 합니다.</p>
 
               </div>
             </div>
 
-            <div style={{ marginTop: 66, }}>
+            <div style={{ marginTop: 66, zIndex: 2, position: 'relative', }}>
               <Image src={require('../assets/images/main.png')} alt={'main'} style={{ width: '1100px', height: '438px' }} />
             </div>
-            <div style={{ position: 'absolute', top: -60, right: 0, marginRight: '104px' }}>
+            <div style={{ position: 'absolute', top: -60, right: 0, marginRight: 104 }}>
               <Image className="img" src={require('../assets/images/main_text.png')} alt={'main_text'} width={254} height={259} />
             </div>
 
@@ -99,8 +105,14 @@ const Home = ({ countries }: any) => {
 
         </section>
         <section style={{ height: 679 }}>
-          <div style={{ maxWidth: '1100px', margin: 'auto', display: 'flex', flexDirection: 'row', position: 'relative', height: 679 }}>
-            <div style={{ marginTop: 288 }}>
+          <div style={{ maxWidth: '1100px', margin: 'auto', display: 'flex', flexDirection: 'row', position: 'relative', height: 679, zIndex: 0 }}>
+            <div style={{ zIndex: 1 }}>
+              <hr style={{ left: '0%', height: 'calc(100% - 4px)', border: '1px solid #F0F0F0', position: 'absolute' }} />
+              <hr style={{ left: '33.6%', height: 'calc(100% - 4px)', border: '1px solid #F0F0F0', position: 'absolute' }} />
+              <hr style={{ left: '70.2%', height: 'calc(100% - 4px)', border: '1px solid #F0F0F0', position: 'absolute' }} />
+              <hr style={{ left: '100%', height: 'calc(100% - 4px)', border: '1px solid #F0F0F0', position: 'absolute' }} />
+            </div>
+            <div style={{ marginTop: 288, zIndex: 2, position: 'relative', }}>
               <Image src={require('../assets/images/main_news.png')} alt={'main'} style={{ width: '367px', height: '477px' }} />
             </div>
             <div style={{ marginLeft: 92, marginTop: 304, flex: 1, position: 'relative', zIndex: 0 }}>
@@ -124,7 +136,13 @@ const Home = ({ countries }: any) => {
         </section>
         <section style={{ backgroundColor: color.N40, }}>
           <div style={{ maxWidth: 1100, margin: 'auto', position: 'relative', height: 1152 }}>
-            <div style={{ position: 'absolute', top: 132, right: 92, backgroundColor: '#FDFDFD', padding: '62px 0px 60px 33px' }}>
+            <div>
+              <hr style={{ left: '0%', height: 'calc(100% - 4px)', border: '1px solid #625E5C', position: 'absolute' }} />
+              <hr style={{ left: '33.6%', height: 'calc(100% - 4px)', border: '1px solid #625E5C', position: 'absolute' }} />
+              <hr style={{ left: '70.2%', height: 'calc(100% - 4px)', border: '1px solid #625E5C', position: 'absolute' }} />
+              <hr style={{ left: '100%', height: 'calc(100% - 4px)', border: '1px solid #625E5C', position: 'absolute' }} />
+            </div>
+            <div style={{ position: 'absolute', top: 132, right: 60, backgroundColor: '#FDFDFD', padding: '62px 0px 60px 33px' }}>
               <div style={{ padding: '62px 103px 0px 0px' }}>
                 <Image src={require('../assets/images/mission.png')} alt={'main'} style={{ width: 131, height: 91 }} />
               </div>
@@ -137,7 +155,7 @@ const Home = ({ countries }: any) => {
             </div>
 
 
-            <div style={{ position: 'absolute', top: 313, left: 365.5, backgroundColor: '#FDFDFD', padding: '62px 0px 60px 33px' }}>
+            <div style={{ position: 'absolute', top: 313, left: 370, backgroundColor: '#FDFDFD', padding: '62px 0px 60px 33px' }}>
               <div style={{ padding: '62px 103px 0px 0px' }}>
                 <Image src={require('../assets/images/vision.png')} alt={'main'} style={{ width: 131, height: 91 }} />
               </div>
@@ -151,7 +169,7 @@ const Home = ({ countries }: any) => {
 
 
 
-            <div style={{ position: 'absolute', bottom: 146, right: 92, backgroundColor: '#FDFDFD', padding: '62px 0px 60px 33px' }}>
+            <div style={{ position: 'absolute', bottom: 146, right: 60, backgroundColor: '#FDFDFD', padding: '62px 0px 60px 33px' }}>
               <div style={{ padding: '62px 103px 0px 0px' }}>
                 <Image src={require('../assets/images/value.png')} alt={'main'} style={{ width: 131, height: 91 }} />
               </div>
