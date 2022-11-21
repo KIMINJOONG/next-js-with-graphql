@@ -91,7 +91,7 @@ const Home = ({ countries }: any) => {
 
             <div style={{ position: 'absolute', top: 0, right: 0 }}>
 
-              <div style={{ padding: '36px 13px 121px 14px', backgroundColor: '#F6C42D' }}>
+              <div style={{ padding: '36px 13px 121px 14px', backgroundColor: color.brand }}>
                 <span style={{ textOrientation: 'sideways', writingMode: 'vertical-lr', letterSpacing: 15 }}>NABILERA</span>
               </div>
             </div>
@@ -103,8 +103,9 @@ const Home = ({ countries }: any) => {
             <div style={{ marginTop: 288 }}>
               <Image src={require('../assets/images/main_news.png')} alt={'main'} style={{ width: '367px', height: '477px' }} />
             </div>
-            <div style={{ marginLeft: 92, marginTop: 304, flex: 1 }}>
-              <span style={{ fontSize: 50 }}>News</span>
+            <div style={{ marginLeft: 92, marginTop: 304, flex: 1, position: 'relative', zIndex: 0 }}>
+              <i style={{ position: 'absolute', top: -5, left: -15, width: 45, height: 45, borderRadius: 25, backgroundColor: color.brand }} />
+              <span style={{ fontSize: 50, zIndex: 1, position: 'relative' }}>News</span>
               <ul style={{ marginTop: 33 }}>
                 {
                   news.map((item, index) => (
@@ -165,8 +166,9 @@ const Home = ({ countries }: any) => {
         </section>
         <section style={{ backgroundColor: color.N0, paddingTop: 106, paddingBottom: 40 }}>
           <div style={{ maxWidth: 1100, margin: 'auto', }}>
-            <div>
-              <h2 style={{ fontSize: 50 }}>History</h2>
+            <div style={{ marginLeft: 92, marginTop: 304, flex: 1, position: 'relative', zIndex: 0 }}>
+              <i style={{ position: 'absolute', top: -5, left: -15, width: 45, height: 45, borderRadius: 25, backgroundColor: color.brand }} />
+              <span style={{ fontSize: 50, position: 'relative', fontWeight: 500 }}>History</span>
               <div style={{ display: 'flex', flexDirection: 'row', marginTop: 103, borderTop: '1px solid black', padding: '30px 0px 30px 0px' }}>
                 <div style={{ paddingLeft: 91 }}>
                   <span style={{ fontSize: 35, fontWeight: 700 }}>2022</span>
@@ -175,8 +177,8 @@ const Home = ({ countries }: any) => {
                   <ul>
                     {
                       year2022.map((item, index) => (
-                        <li style={{ marginTop: index === 0 ? 0 : 15, listStyle: 'initial', listStyleType: 'disc' }}>
-                          <span>{item}</span>
+                        <li key={index} style={{ marginTop: index === 0 ? 0 : 15, listStyle: 'initial', listStyleType: 'disc' }}>
+                          <span style={{ fontWeight: 300, fontSize: 16 }}>{item}</span>
                         </li>
                       ))
                     }
@@ -191,8 +193,8 @@ const Home = ({ countries }: any) => {
                   <ul>
                     {
                       year2021.map((item, index) => (
-                        <li style={{ marginTop: index === 0 ? 0 : 15, listStyle: 'initial', listStyleType: 'disc' }}>
-                          <span>{item}</span>
+                        <li key={index} style={{ marginTop: index === 0 ? 0 : 15, listStyle: 'initial', listStyleType: 'disc' }}>
+                          <span style={{ fontWeight: 300, fontSize: 16 }}>{item}</span>
                         </li>
                       ))
                     }
