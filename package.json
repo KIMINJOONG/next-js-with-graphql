@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "pm2-start": "npx pm2 start npm --name 'nabilera' -- start",
     "lint": "next lint"
   },
   "dependencies": {
