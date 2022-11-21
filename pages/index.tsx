@@ -67,7 +67,7 @@ const Home = ({ countries }: any) => {
     <div style={{ display: 'flex', flexDirection: 'column' }}>
 
       <Header />
-      <div style={{ display: 'flex', flexDirection: 'column', overflow: 'scroll', paddingTop: 60, backgroundColor: 'white', }}>
+      <div style={{ display: 'flex', flexDirection: 'column', paddingTop: 60, backgroundColor: 'white', }}>
         <section style={{ backgroundColor: '#F8F8F8', height: 699, }}>
           <div style={{ maxWidth: '1100px', margin: 'auto', position: 'relative' }}>
             <div style={{ zIndex: 1 }}>
@@ -115,10 +115,10 @@ const Home = ({ countries }: any) => {
             <div style={{ marginTop: 288, zIndex: 2, position: 'relative', }}>
               <Image src={require('../assets/images/main_news.png')} alt={'main'} style={{ width: '367px', height: '477px' }} />
             </div>
-            <div style={{ marginLeft: 92, marginTop: 304, flex: 1, position: 'relative', zIndex: 0 }}>
+            <div style={{ marginLeft: 92, marginTop: 304, flex: 1, position: 'relative', zIndex: 2 }}>
               <i style={{ position: 'absolute', top: -5, left: -15, width: 45, height: 45, borderRadius: 25, backgroundColor: color.brand }} />
               <span style={{ fontSize: 50, zIndex: 1, position: 'relative' }}>News</span>
-              <ul style={{ marginTop: 33 }}>
+              <ul style={{ marginTop: 33, zIndex: 2, position: 'relative' }}>
                 {
                   news.map((item, index) => (
                     <li key={index} style={{ display: 'flex', flexDirection: 'row', paddingTop: index === 0 ? 0 : 15, paddingBottom: 15, borderBottomWidth: 1, borderBottomColor: 'black', borderBottomStyle: 'solid' }}>
@@ -136,7 +136,7 @@ const Home = ({ countries }: any) => {
         </section>
         <section style={{ backgroundColor: color.N40, }}>
           <div style={{ maxWidth: 1100, margin: 'auto', position: 'relative', height: 1152 }}>
-            <div>
+            <div style={{ zIndex: 1 }}>
               <hr style={{ left: '0%', height: 'calc(100% - 4px)', border: '1px solid #625E5C', position: 'absolute' }} />
               <hr style={{ left: '33.6%', height: 'calc(100% - 4px)', border: '1px solid #625E5C', position: 'absolute' }} />
               <hr style={{ left: '70.2%', height: 'calc(100% - 4px)', border: '1px solid #625E5C', position: 'absolute' }} />
