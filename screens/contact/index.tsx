@@ -1,6 +1,7 @@
-import { Checkbox, FormControlLabel, FormGroup, TextField } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, FormGroup, TextField } from "@mui/material";
 import Footer from "components/Footer";
 import Header from "components/Header";
+import InputLabel from "components/InputLabel";
 import React from "react";
 import { color } from "styles/theme";
 import { ContactContainer } from "./styles";
@@ -33,19 +34,19 @@ const ContactScreen = ({ query = {}, params = {} }: IProps) => {
                         <div style={{ display: 'flex', flexDirection: 'row' }}>
                             <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
                                 <div style={{ display: 'flex', flex: 1, flexDirection: 'column', }}>
-                                    <label style={{ fontSize: 17, fontWeight: 500 }}>회사명/단체명</label>
+                                    <InputLabel text="회사명/단체명" />
                                     <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column' }}>
                                         <TextField id={'standard-basic'} variant={'standard'} placeholder={'회사명이나 단체명을 입력해주세요.'} />
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', flex: 1, flexDirection: 'column', marginTop: 45 }}>
-                                    <label style={{ fontSize: 17, fontWeight: 500 }}>연락처</label>
+                                    <InputLabel text="연락처" />
                                     <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column' }}>
                                         <TextField id={'standard-basic'} variant={'standard'} placeholder={'연락처를 입력해주세요.'} />
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', flex: 1, flexDirection: 'column', marginTop: 45 }}>
-                                    <label style={{ fontSize: 17, fontWeight: 500 }}>예산규모</label>
+                                    <InputLabel text="예산규모" />
                                     <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column' }}>
                                         <TextField id={'standard-basic'} variant={'standard'} placeholder={'예산을 입력해주세요.'} />
                                     </div>
@@ -54,13 +55,17 @@ const ContactScreen = ({ query = {}, params = {} }: IProps) => {
                             </div>
                             <div style={{ flex: 1, marginLeft: 183 }}>
                                 <div style={{ display: 'flex', flex: 1, flexDirection: 'column', }}>
-                                    <label style={{ fontSize: 17, fontWeight: 500 }}>성함/직책</label>
+                                    <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+                                        <InputLabel text="성함/직책" />
+                                    </div>
                                     <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column' }}>
                                         <TextField id={'standard-basic'} variant={'standard'} placeholder={'담당자 성함/직책을 입력해주세요.'} />
                                     </div>
                                 </div>
                                 <div style={{ display: 'flex', flex: 1, flexDirection: 'column', marginTop: 45 }}>
-                                    <label style={{ fontSize: 17, fontWeight: 500 }}>E-mail</label>
+                                    <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+                                        <InputLabel text="E-mail" />
+                                    </div>
                                     <div style={{ marginTop: 16, display: 'flex', flexDirection: 'column', }}>
                                         <TextField id={'standard-basic'} variant={'standard'} placeholder={'이메일을 입력해주세요.'} />
                                     </div>
@@ -69,7 +74,9 @@ const ContactScreen = ({ query = {}, params = {} }: IProps) => {
                         </div>
                         <div style={{ marginTop: 45 }}>
                             <div style={{ display: 'flex', flex: 1, flexDirection: 'column', }}>
-                                <label style={{ fontSize: 17, fontWeight: 500 }}>사업문의</label>
+                                <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+                                    <InputLabel text="사업문의" />
+                                </div>
                                 <div style={{ marginTop: 24, display: 'flex', flexDirection: 'column' }}>
                                     <TextField
                                         id="outlined-multiline-static"
@@ -81,8 +88,10 @@ const ContactScreen = ({ query = {}, params = {} }: IProps) => {
                             </div>
                         </div>
                         <div style={{ marginTop: 46 }}>
-                            <div style={{ display: 'flex', flex: 1, flexDirection: 'column', }}>
-                                <label style={{ fontSize: 17, fontWeight: 500 }}>개인정보 수집 및 이용 동의</label>
+                            <div style={{ display: 'flex', flex: 1, flexDirection: 'column' }}>
+                                <div style={{ display: 'flex', alignItems: 'flex-start' }}>
+                                    <InputLabel text="개인정보 수집 및 이용 동의" />
+                                </div>
                                 <div style={{ marginTop: 24, display: 'flex', flexDirection: 'column' }}>
                                     <TextField
                                         id="outlined-multiline-static"
@@ -91,7 +100,7 @@ const ContactScreen = ({ query = {}, params = {} }: IProps) => {
                                         placeholder={'구체적으로 문의하실 내용을 기재해주세요.'}
                                     />
                                 </div>
-                                <div style={{ marginTop: 14 }}>
+                                <div style={{ marginTop: 14, paddingLeft: 15 }}>
                                     <FormGroup>
                                         <FormControlLabel control={<Checkbox defaultChecked />} label="개인정보 수집 및 이용에 동의합니다." />
                                     </FormGroup>
@@ -99,9 +108,9 @@ const ContactScreen = ({ query = {}, params = {} }: IProps) => {
                             </div>
                         </div>
                         <div style={{ marginTop: 32, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <div style={{ padding: '26px 103px 25px 103px', border: `1px solid ${color.N50}` }}>
-                                <span>문의하기</span>
-                            </div>
+                            <Button variant="outlined" style={{ padding: '26px 103px 25px 103px', border: `1px solid ${color.N50}` }} >
+                                문의하기
+                            </Button>
                         </div>
                     </div>
                     <div style={{ marginTop: 126 }}></div>
