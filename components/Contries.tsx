@@ -51,7 +51,7 @@ export default function Countries() {
 
   return (
     <div className={styles.grid}>
-      {countries.map((country) => (
+      {countries.map((country: any) => (
         <div key={country.code} className={styles.card}>
           <h3>
             <a
