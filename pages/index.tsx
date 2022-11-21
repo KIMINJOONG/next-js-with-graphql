@@ -108,7 +108,7 @@ const Home = ({ countries }: any) => {
               <ul style={{ marginTop: 33 }}>
                 {
                   news.map((item, index) => (
-                    <li style={{ display: 'flex', flexDirection: 'row', paddingTop: index === 0 ? 0 : 15, paddingBottom: 15, borderBottomWidth: 1, borderBottomColor: 'black', borderBottomStyle: 'solid' }}>
+                    <li key={index} style={{ display: 'flex', flexDirection: 'row', paddingTop: index === 0 ? 0 : 15, paddingBottom: 15, borderBottomWidth: 1, borderBottomColor: 'black', borderBottomStyle: 'solid' }}>
 
                       <p style={{ flex: 1, fontSize: 15 }}>{item.title}</p>
                       <p style={{ fontSize: 14 }}>{item.date}</p>

@@ -41,14 +41,24 @@ export const HeaderContainer = styled.nav`
                     position: relative;
                     &:hover {
                         .dropdown-content {
-                            display : block;
+                            visibility: visible;
+                            opacity: 1;
+                            > ul {
+                                top: 60px;
+                            }
+                            .dropdown-background {
+                                top: 60px;
+                            }
                         }
                     }
                     .dropdown-content {
-                        display: none;
+                        visibility: hidden;
+                        opacity: 0;
+                        transition: visibility 0s, opacity 0.3s linear;
                         > ul {
+                            transition: top 0.3s;
                             position: absolute;
-                            top: 60px;
+                            top: 0;
                             left: 0;
                             min-width: 300px;
                             display: flex;
@@ -64,7 +74,8 @@ export const HeaderContainer = styled.nav`
                         }
                         .dropdown-background {
                             position: fixed;
-                            top: 60px;
+                            transition: top 0.3s;
+                            top: 0;
                             height: 60px;
                             left: 0;
                             width: 100%;
