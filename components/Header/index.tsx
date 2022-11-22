@@ -1,4 +1,4 @@
-import React, { MouseEvent } from "react";
+import React, { MouseEvent, useCallback } from "react";
 import Image from 'next/image'
 import Link from "next/link";
 import { HeaderContainer } from "./headerContainer";
@@ -41,6 +41,10 @@ const Header = (props: IHeader) => {
         router.push(href)
     }
 
+    const onClickSocial = useCallback((url: string) => {
+        window.open(url);
+    }, []);
+
     return (
         <HeaderContainer>
             <div className="header-inner">
@@ -73,10 +77,10 @@ const Header = (props: IHeader) => {
                         ))}
                     </ul>
                     <div style={{ marginLeft: 37.77 }}>
-                        <Image style={{ marginRight: 9.74 }} src={require('../../assets/images/facebook.png')} width={31} height={31} alt={"facebook"} />
-                        <Image style={{ marginRight: 9.74 }} src={require('../../assets/images/youtube.png')} width={31} height={31} alt={"youtube"} />
-                        <Image style={{ marginRight: 9.74 }} src={require('../../assets/images/naver.png')} width={31} height={31} alt={'naver'} />
-                        <Image src={require('../../assets/images/insta.png')} width={31} height={31} alt={'insta'} />
+                        <Image style={{ marginRight: 9.74, cursor: 'pointer' }} src={require('../../assets/images/facebook.png')} width={31} height={31} alt={"facebook"} onClick={() => onClickSocial('https://www.facebook.com/nabilera.official?mibextid=ZbWKwL')} />
+                        <Image style={{ marginRight: 9.74, cursor: 'pointer' }} src={require('../../assets/images/youtube.png')} width={31} height={31} alt={"youtube"} onClick={() => onClickSocial('https://www.facebook.com/nabilera.official?mibextid=ZbWKwL')} />
+                        <Image style={{ marginRight: 9.74, cursor: 'pointer' }} src={require('../../assets/images/naver.png')} width={31} height={31} alt={'naver'} onClick={() => onClickSocial('https://www.facebook.com/nabilera.official?mibextid=ZbWKwL')} />
+                        <Image style={{ cursor: 'pointer' }} src={require('../../assets/images/insta.png')} width={31} height={31} alt={'insta'} onClick={() => onClickSocial('https://www.facebook.com/nabilera.official?mibextid=ZbWKwL')} />
                     </div>
                 </div>
             </div>
