@@ -123,8 +123,8 @@ const Home = ({ countries }: any) => {
                   news.map((item, index) => (
                     <li key={index} style={{ display: 'flex', flexDirection: 'row', paddingTop: index === 0 ? 0 : 15, paddingBottom: 15, borderBottomWidth: 1, borderBottomColor: 'black', borderBottomStyle: 'solid' }}>
 
-                      <p style={{ flex: 1, fontSize: 15 }}>{item.title}</p>
-                      <p style={{ fontSize: 14 }}>{item.date}</p>
+                      <p style={{ flex: 1, fontSize: 15, fontWeight: 300, color: color.N50 }}>{item.title}</p>
+                      <p style={{ fontSize: 14, fontWeight: 300, color: color.N50 }}>{item.date}</p>
                     </li>
                   ))
                 }
@@ -147,8 +147,8 @@ const Home = ({ countries }: any) => {
                 <Image src={require('../assets/images/mission.png')} alt={'main'} style={{ width: 131, height: 91 }} />
               </div>
               <div style={{ marginTop: 61 }}>
-                <h3>미션</h3>
-                <p style={{ marginTop: 20, maxWidth: 211 }}>
+                <span style={{ fontSize: 25, fontWeight: 700, color: color.N60 }}>미션</span>
+                <p style={{ marginTop: 20, maxWidth: 211, fontSize: 16, fontWeight: 300, color: color.N60 }}>
                   지역의 문화자원을 창의적 사고와 끝없는 도전을 통해 콘텐츠를 개발함으로써 지역의 문화를 바꾼다.
                 </p>
               </div>
@@ -160,8 +160,8 @@ const Home = ({ countries }: any) => {
                 <Image src={require('../assets/images/vision.png')} alt={'main'} style={{ width: 131, height: 91 }} />
               </div>
               <div style={{ marginTop: 61 }}>
-                <h3>비전</h3>
-                <p style={{ marginTop: 20, maxWidth: 211 }}>
+                <span style={{ fontSize: 25, fontWeight: 700, color: color.N60 }}>비전</span>
+                <p style={{ marginTop: 20, maxWidth: 211, fontSize: 16, fontWeight: 300, color: color.N60 }}>
                   지역 역사와 문화를 통해 공간을 재생하여 국내 및 해외 관광객들에게 지역 문화 콘텐츠 제공
                 </p>
               </div>
@@ -174,8 +174,8 @@ const Home = ({ countries }: any) => {
                 <Image src={require('../assets/images/value.png')} alt={'main'} style={{ width: 131, height: 91 }} />
               </div>
               <div style={{ marginTop: 61 }}>
-                <h3>가치</h3>
-                <p style={{ marginTop: 20, maxWidth: 211 }}>
+                <span style={{ fontSize: 25, fontWeight: 700, color: color.N60 }}>비전</span>
+                <p style={{ marginTop: 20, maxWidth: 211, fontSize: 16, fontWeight: 300, color: color.N60 }}>
                   #지역 #문화 #재생
                 </p>
               </div>
@@ -196,7 +196,7 @@ const Home = ({ countries }: any) => {
                     {
                       year2022.map((item, index) => (
                         <li key={index} style={{ marginTop: index === 0 ? 0 : 15, listStyle: 'initial', listStyleType: 'disc' }}>
-                          <span style={{ fontWeight: 300, fontSize: 16 }}>{item}</span>
+                          <span style={{ fontWeight: 300, fontSize: 16, color: color.N50 }}>{item}</span>
                         </li>
                       ))
                     }
@@ -212,7 +212,7 @@ const Home = ({ countries }: any) => {
                     {
                       year2021.map((item, index) => (
                         <li key={index} style={{ marginTop: index === 0 ? 0 : 15, listStyle: 'initial', listStyleType: 'disc' }}>
-                          <span style={{ fontWeight: 300, fontSize: 16 }}>{item}</span>
+                          <span style={{ fontWeight: 300, fontSize: 16, color: color.N50 }}>{item}</span>
                         </li>
                       ))
                     }
