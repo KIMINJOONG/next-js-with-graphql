@@ -92,13 +92,15 @@ const ContactScreen = ({ query = {}, params = {} }: IProps) => {
                                 <div style={{ display: 'flex', alignItems: 'flex-start' }}>
                                     <InputLabel text="개인정보 수집 및 이용 동의" />
                                 </div>
-                                <div style={{ marginTop: 24, display: 'flex', flexDirection: 'column' }}>
-                                    <TextField
-                                        id="outlined-multiline-static"
-                                        multiline
-                                        rows={6}
-                                        placeholder={'구체적으로 문의하실 내용을 기재해주세요.'}
-                                    />
+                                <div style={{ marginTop: 24, height: 119, overflowX: 'scroll', padding: '32px 20px 32px 20px', border: '1px solid #ABABAB' }}>
+                                    <p style={{ fontSize: 13, color: color.N50, fontWeight: 300, lineHeight: 1.56, letterSpacing: 1.3 }}>
+
+                                        제1조 개인정보 수집에 대한 동의<br />
+                                        Vivade (‘URL’이하 ‘사이트’) 은(는) 고객은 사이트 회원 가입시 회원 약관, 개인정보 수집 및 이용 내용에 대해 「동의함」 버튼을 클릭할 수 있는 절차를 마련하여, 「동의함」 버튼을 클릭하면 개인정보 수집 및 이용에 대해 동의한 것으로 봅니다.
+
+                                        제2조 개인정보의 수집 항목 및 이용 목적"개인정보"는 생존하는 개인에 관한 정보로서 해당 정보에 포함된 성명, 주민등록번호 등의 사항으로 해당 개인
+                                    </p>
+
                                 </div>
                                 <div style={{ marginTop: 14, paddingLeft: 15 }}>
                                     <FormGroup>
@@ -109,7 +111,7 @@ const ContactScreen = ({ query = {}, params = {} }: IProps) => {
                         </div>
                         <div style={{ marginTop: 32, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <Button variant="outlined" style={{ padding: '26px 103px 25px 103px', border: `1px solid ${color.N50}` }} >
-                                문의하기
+                                <span style={{ fontSize: 17, color: color.N50 }}>문의하기</span>
                             </Button>
                         </div>
                     </div>
