@@ -143,7 +143,7 @@ const Home = ({ countries }: any) => {
               <hr style={{ left: '100%', height: 'calc(100% - 4px)', border: '0.5px solid #625E5C', position: 'absolute' }} />
             </div>
             <div style={{ position: 'absolute', top: 132, right: 60, backgroundColor: '#FDFDFD', padding: '62px 0px 60px 33px' }}>
-              <div style={{ padding: '62px 103px 0px 0px' }}>
+              <div style={{ padding: '0px 103px 0px 0px' }}>
                 <Image src={require('../assets/images/mission.png')} alt={'main'} style={{ width: 131, height: 91 }} />
               </div>
               <div style={{ marginTop: 61 }}>
@@ -156,7 +156,7 @@ const Home = ({ countries }: any) => {
 
 
             <div style={{ position: 'absolute', top: 313, left: 370, backgroundColor: '#FDFDFD', padding: '62px 0px 60px 33px' }}>
-              <div style={{ padding: '62px 103px 0px 0px' }}>
+              <div style={{ padding: '0px 103px 0px 0px' }}>
                 <Image src={require('../assets/images/vision.png')} alt={'main'} style={{ width: 131, height: 91 }} />
               </div>
               <div style={{ marginTop: 61 }}>
@@ -170,11 +170,11 @@ const Home = ({ countries }: any) => {
 
 
             <div style={{ position: 'absolute', bottom: 146, right: 60, backgroundColor: '#FDFDFD', padding: '62px 0px 60px 33px' }}>
-              <div style={{ padding: '62px 103px 0px 0px' }}>
+              <div style={{ padding: '0px 103px 0px 0px' }}>
                 <Image src={require('../assets/images/value.png')} alt={'main'} style={{ width: 131, height: 91 }} />
               </div>
               <div style={{ marginTop: 61 }}>
-                <span style={{ fontSize: 25, fontWeight: 700, color: color.N60 }}>비전</span>
+                <span style={{ fontSize: 25, fontWeight: 700, color: color.N60 }}>가치</span>
                 <p style={{ marginTop: 20, maxWidth: 211, fontSize: 16, fontWeight: 300, color: color.N60 }}>
                   #지역 #문화 #재생
                 </p>
