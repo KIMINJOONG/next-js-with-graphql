@@ -13,6 +13,7 @@ const HeadMeta = ({ title }: IHeadMeta) => {
       <meta property="og:url" content={"og:url"} key="og:url" />
       <meta property="og:description" content={"og:description"} key="og:description" />
       <meta name="msapplication-TileColor" content="#ffffff" />
+      <link rel="shortcut icon" href="/favicon.ico" />
       {/* <meta name="msapplication-TileImage" content="https://d4x5yybe1iyrp.cloudfront.net/public/assets/images/bo_favi/ms-icon-144x144.png" /> */}
       <meta name="theme-color" content="#ffffff" />
       <title>{title ? title : "나빌레라"}</title>

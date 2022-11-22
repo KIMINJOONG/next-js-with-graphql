@@ -78,9 +78,9 @@ const Header = (props: IHeader) => {
                     </ul>
                     <div style={{ marginLeft: 37.77 }}>
                         <Image style={{ marginRight: 9.74, cursor: 'pointer' }} src={require('../../assets/images/facebook.png')} width={31} height={31} alt={"facebook"} onClick={() => onClickSocial('https://www.facebook.com/nabilera.official?mibextid=ZbWKwL')} />
-                        <Image style={{ marginRight: 9.74, cursor: 'pointer' }} src={require('../../assets/images/youtube.png')} width={31} height={31} alt={"youtube"} onClick={() => onClickSocial('https://www.facebook.com/nabilera.official?mibextid=ZbWKwL')} />
-                        <Image style={{ marginRight: 9.74, cursor: 'pointer' }} src={require('../../assets/images/naver.png')} width={31} height={31} alt={'naver'} onClick={() => onClickSocial('https://www.facebook.com/nabilera.official?mibextid=ZbWKwL')} />
-                        <Image style={{ cursor: 'pointer' }} src={require('../../assets/images/insta.png')} width={31} height={31} alt={'insta'} onClick={() => onClickSocial('https://www.facebook.com/nabilera.official?mibextid=ZbWKwL')} />
+                        <Image style={{ marginRight: 9.74, cursor: 'pointer' }} src={require('../../assets/images/youtube.png')} width={31} height={31} alt={"youtube"} onClick={() => onClickSocial('https://youtube.com/channel/UC69_LSbhYcZFuaprQuXkFnA')} />
+                        <Image style={{ marginRight: 9.74, cursor: 'pointer' }} src={require('../../assets/images/naver.png')} width={31} height={31} alt={'naver'} onClick={() => onClickSocial('https://m.blog.naver.com/PostList.naver?blogId=nabilera2020')} />
+                        <Image style={{ cursor: 'pointer' }} src={require('../../assets/images/insta.png')} width={31} height={31} alt={'insta'} onClick={() => onClickSocial('https://instagram.com/nabilera.official?igshid=YmMyMTA2M2Y=')} />
                     </div>
                 </div>
             </div>

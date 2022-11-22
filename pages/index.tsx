@@ -226,40 +226,40 @@ const Home = ({ countries }: any) => {
         <MainSectionBottom>
           <div style={{ display: 'flex', flexDirection: 'row', maxWidth: 1100, margin: 'auto', padding: '76px 0px 68px 0px' }}>
             <div>
-              <span style={{ fontSize: 45, fontWeight: 700 }}>Contact us !</span>
+              <span style={{ fontSize: 45, fontWeight: 700, color: color.N60 }}>Contact us !</span>
             </div>
             <div style={{ marginLeft: 92, paddingTop: 114, display: 'flex', flexDirection: 'row', }}>
               <div>
-                <span style={{ fontSize: 18, fontWeight: 600 }}>Address</span>
+                <span style={{ fontSize: 18, fontWeight: 600, color: color.N60 }}>Address</span>
                 <div style={{ marginTop: 14 }}>
-                  <span style={{ fontSize: 13, fontWeight: 400 }}>Hongseong. Korea</span>
+                  <span style={{ fontSize: 13, fontWeight: 400, color: color.N60 }}>Hongseong. Korea</span>
                 </div>
               </div>
               <div style={{ marginLeft: 56 }}>
-                <span style={{ fontSize: 18, fontWeight: 600 }}>Email</span>
+                <span style={{ fontSize: 18, fontWeight: 600, color: color.N60 }}>Email</span>
                 <div style={{ marginTop: 14 }}>
-                  <span style={{ fontSize: 13, fontWeight: 400 }}>nabilera2020@naver.com</span>
+                  <span style={{ fontSize: 13, fontWeight: 400, color: color.N60 }}>nabilera2020@naver.com</span>
                 </div>
               </div>
               <div style={{ marginLeft: 56 }}>
-                <span style={{ fontSize: 18, fontWeight: 600 }}>Tel</span>
+                <span style={{ fontSize: 18, fontWeight: 600, color: color.N60 }}>Tel</span>
                 <div style={{ marginTop: 14 }}>
-                  <span style={{ fontSize: 13, fontWeight: 400 }}>041-406-8998</span>
+                  <span style={{ fontSize: 13, fontWeight: 400, color: color.N60 }}>041-406-8998</span>
                 </div>
               </div>
               <div style={{ marginLeft: 56 }}>
-                <span style={{ fontSize: 18, fontWeight: 600 }}>SNS</span>
+                <span style={{ fontSize: 18, fontWeight: 600, color: color.N60 }}>SNS</span>
                 <div style={{ marginTop: 14 }}>
-                  <span style={{ fontSize: 13, fontWeight: 400 }}>Instagram</span>
+                  <span style={{ fontSize: 13, fontWeight: 400, color: color.N60 }}>Instagram</span>
                 </div>
                 <div style={{ marginTop: 12 }}>
-                  <span style={{ fontSize: 13, fontWeight: 400 }}>Facebook</span>
+                  <span style={{ fontSize: 13, fontWeight: 400, color: color.N60 }}>Facebook</span>
                 </div>
                 <div style={{ marginTop: 12 }}>
-                  <span style={{ fontSize: 13, fontWeight: 400 }}>Blog</span>
+                  <span style={{ fontSize: 13, fontWeight: 400, color: color.N60 }}>Blog</span>
                 </div>
                 <div style={{ marginTop: 12 }}>
-                  <span style={{ fontSize: 13, fontWeight: 400 }}>Youtube</span>
+                  <span style={{ fontSize: 13, fontWeight: 400, color: color.N60 }}>Youtube</span>
                 </div>
               </div>
             </div>
