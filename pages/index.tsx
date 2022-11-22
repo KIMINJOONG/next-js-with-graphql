@@ -71,10 +71,10 @@ const Home = ({ countries }: any) => {
         <section style={{ backgroundColor: '#F8F8F8', height: 699, }}>
           <div style={{ maxWidth: '1100px', margin: 'auto', position: 'relative' }}>
             <div style={{ zIndex: 1 }}>
-              <hr style={{ left: '0%', height: 'calc(100% - 4px)', border: '1px solid #F0F0F0', position: 'absolute' }} />
-              <hr style={{ left: '33.6%', height: 'calc(100% - 4px)', border: '1px solid #F0F0F0', position: 'absolute' }} />
-              <hr style={{ left: '70.2%', height: 'calc(100% - 4px)', border: '1px solid #F0F0F0', position: 'absolute' }} />
-              <hr style={{ left: '100%', height: 'calc(100% - 4px)', border: '1px solid #F0F0F0', position: 'absolute' }} />
+              <hr style={{ left: '0%', height: 'calc(100% - 4px)', border: '0.5px solid #F0F0F0', position: 'absolute' }} />
+              <hr style={{ left: '33.6%', height: 'calc(100% - 4px)', border: '0.5px solid #F0F0F0', position: 'absolute' }} />
+              <hr style={{ left: '70.2%', height: 'calc(100% - 4px)', border: '0.5px solid #F0F0F0', position: 'absolute' }} />
+              <hr style={{ left: '100%', height: 'calc(100% - 4px)', border: '0.5px solid #F0F0F0', position: 'absolute' }} />
             </div>
             <div style={{ paddingTop: 160, zIndex: 2, position: 'relative', }}>
               <div>
@@ -107,10 +107,10 @@ const Home = ({ countries }: any) => {
         <section style={{ height: 679 }}>
           <div style={{ maxWidth: '1100px', margin: 'auto', display: 'flex', flexDirection: 'row', position: 'relative', height: 679, zIndex: 0 }}>
             <div style={{ zIndex: 1 }}>
-              <hr style={{ left: '0%', height: 'calc(100% - 4px)', border: '1px solid #F0F0F0', position: 'absolute' }} />
-              <hr style={{ left: '33.6%', height: 'calc(100% - 4px)', border: '1px solid #F0F0F0', position: 'absolute' }} />
-              <hr style={{ left: '70.2%', height: 'calc(100% - 4px)', border: '1px solid #F0F0F0', position: 'absolute' }} />
-              <hr style={{ left: '100%', height: 'calc(100% - 4px)', border: '1px solid #F0F0F0', position: 'absolute' }} />
+              <hr style={{ left: '0%', height: 'calc(100% - 4px)', border: '0.5px solid #F0F0F0', position: 'absolute' }} />
+              <hr style={{ left: '33.6%', height: 'calc(100% - 4px)', border: '0.5px solid #F0F0F0', position: 'absolute' }} />
+              <hr style={{ left: '70.2%', height: 'calc(100% - 4px)', border: '0.5px solid #F0F0F0', position: 'absolute' }} />
+              <hr style={{ left: '100%', height: 'calc(100% - 4px)', border: '0.5px solid #F0F0F0', position: 'absolute' }} />
             </div>
             <div style={{ marginTop: 288, zIndex: 2, position: 'relative', }}>
               <Image src={require('../assets/images/main_news.png')} alt={'main'} style={{ width: '367px', height: '477px' }} />
@@ -137,10 +137,10 @@ const Home = ({ countries }: any) => {
         <section style={{ backgroundColor: color.N40, }}>
           <div style={{ maxWidth: 1100, margin: 'auto', position: 'relative', height: 1152 }}>
             <div style={{ zIndex: 1 }}>
-              <hr style={{ left: '0%', height: 'calc(100% - 4px)', border: '1px solid #625E5C', position: 'absolute' }} />
-              <hr style={{ left: '33.6%', height: 'calc(100% - 4px)', border: '1px solid #625E5C', position: 'absolute' }} />
-              <hr style={{ left: '70.2%', height: 'calc(100% - 4px)', border: '1px solid #625E5C', position: 'absolute' }} />
-              <hr style={{ left: '100%', height: 'calc(100% - 4px)', border: '1px solid #625E5C', position: 'absolute' }} />
+              <hr style={{ left: '0%', height: 'calc(100% - 4px)', border: '0.5px solid #625E5C', position: 'absolute' }} />
+              <hr style={{ left: '33.6%', height: 'calc(100% - 4px)', border: '0.5px solid #625E5C', position: 'absolute' }} />
+              <hr style={{ left: '70.2%', height: 'calc(100% - 4px)', border: '0.5px solid #625E5C', position: 'absolute' }} />
+              <hr style={{ left: '100%', height: 'calc(100% - 4px)', border: '0.5px solid #625E5C', position: 'absolute' }} />
             </div>
             <div style={{ position: 'absolute', top: 132, right: 60, backgroundColor: '#FDFDFD', padding: '62px 0px 60px 33px' }}>
               <div style={{ padding: '62px 103px 0px 0px' }}>
