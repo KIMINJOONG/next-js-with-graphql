@@ -1,4 +1,6 @@
 import { Button, Checkbox, FormControlLabel, FormGroup, TextField } from "@mui/material";
+import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import { GOOGLE_API_KEY } from "assets/utils/ENV";
 import Footer from "components/Footer";
 import Header from "components/Header";
 import InputLabel from "components/InputLabel";
@@ -16,7 +18,36 @@ interface IContactQuery {
     type?: number;
 }
 
+const containerStyle = {
+    width: '100%',
+    height: '338px'
+};
+
+const center = {
+    lat: 37.5233278,
+    lng: 126.9234386
+};
+
 const ContactScreen = ({ query = {}, params = {} }: IProps) => {
+    const { isLoaded } = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: GOOGLE_API_KEY
+    })
+
+    const [map, setMap] = React.useState(null)
+
+    const onLoad = React.useCallback(function callback(map: any) {
+        // This is just an example of getting and using the map instance!!! don't just blindly copy!
+        const bounds = new window.google.maps.LatLngBounds(center);
+        map.fitBounds(bounds);
+
+        setMap(map)
+    }, [])
+
+    const onUnmount = React.useCallback(function callback(map: any) {
+        setMap(null)
+    }, [])
+
     return (
         <div>
             <Header />
@@ -115,7 +146,22 @@ const ContactScreen = ({ query = {}, params = {} }: IProps) => {
                             </Button>
                         </div>
                     </div>
-                    <div style={{ marginTop: 126 }}></div>
+                    <div style={{ marginTop: 126 }}>
+                        {
+                            isLoaded ? (
+                                <GoogleMap
+                                    mapContainerStyle={containerStyle}
+                                    center={center}
+                                    zoom={10}
+                                    onLoad={onLoad}
+                                    onUnmount={onUnmount}
+                                >
+                                    { /* Child components, such as markers, info windows, etc. */}
+                                    <></>
+                                </GoogleMap>
+                            ) : <></>
+                        }
+                    </div>
                 </div>
             </ContactContainer>
             <Footer />
