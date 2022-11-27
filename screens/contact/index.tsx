@@ -50,7 +50,7 @@ const ContactScreen = ({ query = {}, params = {} }: IProps) => {
 
     return (
         <div>
-            <Header />
+            <Header type={3} />
             <ContactContainer>
                 <div style={{ display: 'flex', justifyContent: 'center', padding: '81px 0px 121px 0px', borderBottom: '1px solid black' }}>
                     <div style={{ position: 'relative', zIndex: 0 }}>

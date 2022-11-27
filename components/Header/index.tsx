@@ -57,6 +57,7 @@ const Header = (props: IHeader) => {
                             <li key={menu.id} className={`menu-item ${menu.hover}`} onClick={(e) => onClickMenu(e, menu.href)}>
                                 <a className="menu-href">
                                     <span style={{ fontSize: 15, fontWeight: 500, }}>{menu.name}</span>
+                                    <div className={`munu-underline ${props.type ? (props.type - 1 === index ? 'active' : '') : ''}`} />
                                 </a>
                                 {menu.hover && <div className="dropdown-content">
                                     <div className="dropdown-background" />

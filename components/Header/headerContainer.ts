@@ -31,7 +31,27 @@ export const HeaderContainer = styled.nav`
                     height: 100%;
                     margin-right: 36px;
                     .menu-href {
+                        position: relative;
                         color: ${color.N40};
+                        .munu-underline {
+                            z-index: -1;
+                            position: absolute;
+                            width: 0%;
+                            bottom: 3px;
+                            border-bottom: 7px solid ${color.brand};
+                            transition: all ease 0.2s 0s;
+                        }
+                        .munu-underline.active {
+                            width: 100%;
+                        }
+                    }
+                    
+                }
+                .menu-item:hover {
+                    .menu-href {
+                        .munu-underline {
+                            width: 100%;
+                        }
                     }
                 }
                 .menu-item:last-child {

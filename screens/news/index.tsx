@@ -1,7 +1,7 @@
 import Header from "components/Header"
 import HeadMeta from "components/Header/HeadMeta"
 import { CustomTextFiled } from "components/TextField"
-import { Fragment, useState } from "react"
+import { ClassAttributes, Fragment, useEffect, useRef, useState } from "react"
 import { color } from "styles/theme"
 import { NewsContainer } from "./style"
 import { InputAdornment, Table, TableHead, TableBody, TableRow, TableCell, Pagination } from "@mui/material";
@@ -25,11 +25,19 @@ const NewsScreen = () => {
 
     const router = useRouter()
     const [keyword, setKeyword] = useState('')
+    const [existScroll, setExistScroll] = useState(false)
     const onChangeKeyword = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         setKeyword(e.target.value)
     }
+    const ref = useRef<HTMLDivElement>(null);
 
-    return <Fragment>
+    useEffect(() => {
+        if (ref.current != null) {
+            setExistScroll(ref.current.scrollHeight > ref.current.clientHeight)
+        }
+    }, [])
+
+    return <div ref={ref} style={{ marginRight: existScroll ? 0 : 0 }}>
         <HeadMeta title={`나빌레라 : 뉴스`} />
         <Header type={2} />
         <NewsContainer>
@@ -128,7 +136,7 @@ const NewsScreen = () => {
             </div>
         </NewsContainer>
         <Footer />
-    </Fragment>
+    </div>
 }
 
 export default NewsScreen
