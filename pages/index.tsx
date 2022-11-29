@@ -45,7 +45,6 @@ interface IProps {
 }
 
 const Home = ({ data }: IProps) => {
-  console.log(data)
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
 
