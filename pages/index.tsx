@@ -167,7 +167,7 @@ const Home = ({ data }: IProps) => {
         </section>
         <section style={{ backgroundColor: color.N0, paddingTop: 106, paddingBottom: 40 }}>
           <div style={{ maxWidth: 1100, margin: 'auto', }}>
-            <div style={{ marginLeft: 92, marginTop: 304, flex: 1, position: 'relative', zIndex: 0 }}>
+            <div style={{ marginLeft: 92, flex: 1, position: 'relative', zIndex: 0 }}>
               <i style={{ position: 'absolute', top: -5, left: -15, width: 45, height: 45, borderRadius: 25, backgroundColor: color.brand }} />
               <span style={{ fontSize: 50, position: 'relative', fontWeight: 500, }}>History</span>
               {data?.histories.map((hi, key) => <div key={key} style={{ display: 'flex', flexDirection: 'row', marginTop: key ? 0 : 103, borderTop: '1px solid black', padding: '30px 0px 30px 0px' }}>
