@@ -1,23 +1,26 @@
 import { gql } from '@apollo/client';
 import { GQL_DOMAIN } from 'assets/utils/ENV';
 import { NameNode, OperationDefinitionNode } from 'graphql';
+import NewsModifyScreen from 'screens/admin/news/modify';
 import axiosInstance from "assets/apis/axiosInstance";
-import NewsScreen from 'screens/news';
 
-export const getServerSideProps = async ({ query = {}, params = {} }) => {
+export const getServerSideProps = async ({ query = { idx: null }, params = {} }) => {
     const gquery = `
-            query fetchNews($page: Int) {
-                fetchNews(page: $page) {
+            query fetchNewsDetail($idx: Int) {
+                fetchNewsDetail(idx: $idx) {
                     status
                     data {
-                        list {
+                        categories {
                             idx
-                            category
                             title
-                            views
+                        }
+                        news {
+                            idx
+                            category_idx
+                            title
+                            content
                             created_at
-                        },
-                        total_count
+                        }
                     }
                     token
                     error {
@@ -40,7 +43,7 @@ export const getServerSideProps = async ({ query = {}, params = {} }) => {
             .post(`${GQL_DOMAIN}`, {
                 query: gquery,
                 variables: {
-                    page: 0
+                    idx: Number(query.idx)
                 }
             })
         return {
@@ -51,6 +54,7 @@ export const getServerSideProps = async ({ query = {}, params = {} }) => {
             },
         };
     } catch (e) {
+        // console.log(e)
         return {
             props: {
                 query,
@@ -60,4 +64,4 @@ export const getServerSideProps = async ({ query = {}, params = {} }) => {
     }
 };
 
-export default NewsScreen;
+export default NewsModifyScreen;

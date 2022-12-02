@@ -1,12 +1,18 @@
 import Header from "components/Header"
 import HeadMeta from "components/Header/HeadMeta"
 import { CustomTextFiled } from "components/TextField"
-import { ClassAttributes, Fragment, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { color } from "styles/theme"
 import { NewsContainer } from "./style"
 import { InputAdornment, Table, TableHead, TableBody, TableRow, TableCell, Pagination } from "@mui/material";
 import { useRouter } from "next/router"
 import Footer from "components/Footer"
+import { NPaginationContainer } from "components/pagination"
+import moment from 'moment'
+import { gql } from "@apollo/client"
+import { NameNode, OperationDefinitionNode } from "graphql"
+import { GQL_DOMAIN } from "assets/utils/ENV"
+import axiosInstance from "assets/apis/axiosInstance";
 
 interface IMenu {
     name: string
@@ -20,10 +26,62 @@ const menus: Array<IMenu> = [
     { name: '작성일', width: '140px', class: 'left' },
     { name: '조회수', width: '100px', class: '' },
 ]
+interface INews {
+    idx: number
+    category: string
+    title: string
+    views: number
+    created_at: Date
+}
 
-const NewsScreen = () => {
+interface INewsData {
+    list: Array<INews>
+    total_count: number
+}
 
+interface IProps {
+    data: INewsData | undefined
+}
+
+
+const gquery = `
+    query fetchNews($keyword: String, $page: Int) {
+        fetchNews(keyword: $keyword, page: $page) {
+            status
+            data {
+                list {
+                    idx
+                    category
+                    title
+                    views
+                    created_at
+                },
+                total_count
+            }
+            token
+            error {
+                remark
+                code
+                text
+            }
+        }
+    }
+`;
+
+const gqlQuery = gql`
+        ${gquery}
+    `
+const innerQuery = gqlQuery.definitions[0] as OperationDefinitionNode;
+const { value } = innerQuery.name as NameNode;
+
+
+
+const NewsScreen = ({ data }: IProps) => {
     const router = useRouter()
+    const [loading, setLoading] = useState(false)
+    const [page, setPage] = useState(0)
+    const [totalCount, setTotalCount] = useState(data?.total_count ?? 0)
+    const [list, setList] = useState<Array<INews>>(data?.list ?? [])
     const [keyword, setKeyword] = useState('')
     const [existScroll, setExistScroll] = useState(false)
     const onChangeKeyword = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -36,6 +94,30 @@ const NewsScreen = () => {
             setExistScroll(ref.current.scrollHeight > ref.current.clientHeight)
         }
     }, [])
+
+    const fetchNews = async (newPage: number, init: boolean = false) => {
+        if (loading || (page === newPage && !init)) {
+            return
+        }
+        setLoading(true)
+        setPage(init ? 0 : newPage)
+        try {
+            const { data } = await axiosInstance(value)
+                .post(`${GQL_DOMAIN}`, {
+                    query: gquery,
+                    variables: {
+                        page: init ? 0 : newPage,
+                        keyword: keyword
+                    }
+                })
+            setList(data.data[value].data.list)
+            if (init) {
+                setTotalCount(data.data[value].data.total_count)
+            }
+        } catch (e) {
+        }
+        setLoading(false)
+    }
 
     return <div ref={ref} style={{ marginRight: existScroll ? 0 : 0 }}>
         <HeadMeta title={`나빌레라 : 뉴스`} />
@@ -64,6 +146,11 @@ const NewsScreen = () => {
                                 </InputAdornment>
                             ),
                         }}
+                        onKeyPress={e => {
+                            if (e.key === 'Enter') {
+                                fetchNews(0, true)
+                            }
+                        }}
                     />
                 </div>
                 <div className="list-area">
@@ -76,63 +163,29 @@ const NewsScreen = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody className="table-body">
-                            <TableRow onClick={() => router.push('/news/detail?id=1')}>
+                            {list.map((li, key) => <TableRow key={key} onClick={() => router.push(`/news/detail?idx=${li.idx}`)}>
                                 <TableCell className="table-body-cell index">
-                                    20
+                                    {li.idx}
                                 </TableCell>
                                 <TableCell className="table-body-cell">
-                                    언론보도
+                                    {li.category}
                                 </TableCell>
                                 <TableCell className="table-body-cell left">
-                                    [춘천사람들] [취재기자 현장 인터뷰] (사)강원살이 청년이 행복한 춘천을 꿈꾼다
+                                    {li.title}
                                 </TableCell>
                                 <TableCell className="table-body-cell left light">
-                                    2020-10-29
+                                    {moment(li.created_at).format('YYYY-MM-DD')}
                                 </TableCell>
                                 <TableCell className="table-body-cell light">
-                                    1213
+                                    {li.views}
                                 </TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell className="table-body-cell index">
-                                    20
-                                </TableCell>
-                                <TableCell className="table-body-cell">
-                                    언론보도
-                                </TableCell>
-                                <TableCell className="table-body-cell left">
-                                    [춘천사람들] [취재기자 현장 인터뷰] (사)강원살이 청년이 행복한 춘천을 꿈꾼다
-                                </TableCell>
-                                <TableCell className="table-body-cell left light">
-                                    2020-10-29
-                                </TableCell>
-                                <TableCell className="table-body-cell light">
-                                    1213
-                                </TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell className="table-body-cell index">
-                                    20
-                                </TableCell>
-                                <TableCell className="table-body-cell">
-                                    언론보도
-                                </TableCell>
-                                <TableCell className="table-body-cell left">
-                                    [춘천사람들] [취재기자 현장 인터뷰] (사)강원살이 청년이 행복한 춘천을 꿈꾼다
-                                </TableCell>
-                                <TableCell className="table-body-cell left light">
-                                    2020-10-29
-                                </TableCell>
-                                <TableCell className="table-body-cell light">
-                                    1213
-                                </TableCell>
-                            </TableRow>
+                            </TableRow>)}
                         </TableBody>
                     </Table>
                 </div>
-                <div className="page-area">
-                    <Pagination page={1} count={10} variant="outlined" shape="rounded" onChange={(e) => console.log(e)} />
-                </div>
+                <NPaginationContainer>
+                    <Pagination page={page + 1} count={totalCount} variant="outlined" shape="rounded" onChange={(e, page) => fetchNews(page - 1)} />
+                </NPaginationContainer>
             </div>
         </NewsContainer>
         <Footer />
