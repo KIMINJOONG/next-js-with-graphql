@@ -67,7 +67,11 @@ const TopSectionContainer = styled.div`
 `;
 
 const HRContainer = styled.div`
-z-index: 1;
+    z-index: 1;
+
+    ${media.mobile} {
+        padding-left: 28px;
+    }
 `;
 
 const HR = styled.hr`
@@ -85,9 +89,11 @@ const TopSectionContentContainer = styled.div`
     padding-top: 160px;
     z-index: 2;
     position: relative;
+    
 
     ${media.mobile} {
         padding-top: 48px;
+        padding-left: 28px;
     }
 
 
@@ -104,15 +110,15 @@ const TopSectionContentTitle = styled.p`
 
 const TopSectionContentDescriptionContainer = styled.div`
     margin-top: 28px;
-
-    ${media.mobile} {
-        font-size: 15px;
-    }
 `;
 
 const TopSectionContentDescription = styled.p`
     font-size: 18px;
     font-weight: 300;
+
+    ${media.mobile} {
+        font-size: 15px;
+    }
 `;
 
 const MainTextContainer = styled.div`
@@ -123,7 +129,7 @@ const MainTextContainer = styled.div`
 
     ${media.mobile} {
         top: -80px;
-        right: -70px;
+        right: -110px;
         margin-right: 0px;
 
     }
@@ -143,6 +149,11 @@ const MainImageContainer = styled.div`
     margin-top: 66px; 
     z-index: 2; 
     position: relative;
+
+    ${media.mobile} {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
 `;
 
 const MainImage = styled(Image)`
@@ -234,6 +245,14 @@ const NewsContentContainer = styled.div`
         padding: 0px 16px 0px 15px;
         order: 1;
     }
+`;
+
+const NewsBadgeTextContainer = styled.div`
+    position: relative;
+    ${media.mobile} {
+        padding-left: 16px;
+    }
+
 `;
 
 const TextBadge = styled.i`
@@ -629,21 +648,21 @@ const Home = ({ data }: IProps) => {
                                 <TopSectionContentTitle>문화를 통해 공간을</TopSectionContentTitle>
                                 <TopSectionContentTitle>재생하다.</TopSectionContentTitle>
                             </div>
-                            <TopSectionContentDescriptionContainer style={{ marginTop: 28 }}>
+                            <TopSectionContentDescriptionContainer>
                                 <TopSectionContentDescription >지역 역사와 문화의 고유한 가치를 콘텐츠로 개발하여</TopSectionContentDescription>
                                 <TopSectionContentDescription >지역사회의 가치를 상승시키고 시민들의 삶의 질을 높이고자 합니다.</TopSectionContentDescription>
 
                             </TopSectionContentDescriptionContainer>
                         </TopSectionContentContainer>
 
-                        <MainImageContainer style={{ marginTop: 66, zIndex: 2, position: 'relative', }}>
+                        <MainImageContainer>
                             <MainImage src={require('../../assets/images/main.png')} alt={'main'} />
                         </MainImageContainer>
                         <MainTextContainer>
                             <MainTextImage className="img" src={require('../../assets/images/main_text.png')} alt={'main_text'} />
                         </MainTextContainer>
 
-                        <MainBannerContainer style={{ position: 'absolute', top: 0, right: 0 }}>
+                        <MainBannerContainer>
                             <MainBanner style={{ padding: '36px 13px 121px 14px', backgroundColor: color.brand }}>
                                 <MainBannerText style={{ textOrientation: 'sideways', writingMode: 'vertical-lr', letterSpacing: 15 }}>NABILERA</MainBannerText>
                             </MainBanner>
@@ -663,8 +682,11 @@ const Home = ({ data }: IProps) => {
                             <NewsImage src={require('../../assets/images/main_news.png')} alt={'main'} />
                         </NewsImageContainer>
                         <NewsContentContainer>
-                            <TextBadge />
-                            <NewsText>News</NewsText>
+                            <NewsBadgeTextContainer>
+                                <TextBadge />
+                                <NewsText>News</NewsText>
+                            </NewsBadgeTextContainer>
+
                             <NewsContentUl>
                                 {
                                     data?.news.map((item, index) => (
