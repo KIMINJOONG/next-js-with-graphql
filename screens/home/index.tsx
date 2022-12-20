@@ -12,6 +12,12 @@ const MainSectionBottom = styled.section`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 67%;
+
+  ${media.mobile} {
+    height: 494px;
+    background-position: 60%;
+
+  }
 `;
 
 interface INews {
@@ -144,7 +150,7 @@ const MainImage = styled(Image)`
     height: 438px;
 
     ${media.mobile} {
-        width: 366px;
+        width: 100%;
         height: 387px;
     }
 `;
@@ -471,6 +477,22 @@ const HistoryInnerContainer = styled.div`
     flex: 1;
     position: relative;
     z-index: 0;
+
+    ${media.mobile} {
+        margin-left: 0px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+`;
+
+const HisotryBadgeTextContainer = styled.div`
+    position: relative;
+    margin-bottom: 103px;
+
+    ${media.mobile} {
+        margin-bottom: 76px;
+    }
+
 `;
 
 const HistoryText = styled.span`
@@ -484,15 +506,23 @@ const HistoryText = styled.span`
 `;
 
 const HistoryContentContainer = styled.div`
-display: flex;
-flex-direction: row;
-margin-top: ${(props: { index: number }) => props.index === 0 ? 0 : 103};
-border-top: 1px solid black;
-padding: 30px 0px 30px 0px;
+    display: flex;
+    flex-direction: row;
+    margin-top: ${(props: { index: number }) => props.index === 0 ? 0 : 103};
+    border-top: 1px solid black;
+    padding: 30px 0px 30px 0px;
+
+    ${media.mobile} {
+        flex-direction: column;
+    }
+
 `;
 
 const HisotryContentTitleContainer = styled.div`
-padding-left: 91px;
+    padding-left: 91px;
+    ${media.mobile} {
+        padding-left: 29px;
+    }
 
 `;
 
@@ -506,12 +536,76 @@ const HisotryContentDescriptionContainer = styled.div`
     margin-left: 182px;
     flex: 1;
 
+    ${media.mobile} {
+        margin-left: 0px;
+        padding: 17px 15px 0px 32px;
+    }
+
 `;
 
 const HisotryContentDescription = styled.span`
     font-size: 16px;
     font-weight: 300;
     color: ${color.N50};
+`;
+
+const MainBottomContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    max-width: 1100px;
+    margin: auto;
+    padding: 76px 0px 68px 0px;
+
+    ${media.mobile} {
+        flex-direction: column;
+        padding: 72px 0px 75px 14px;
+    }
+`;
+
+const MainBottomTitle = styled.span`
+    font-size: 45px;
+    font-weight: 700;
+    color: ${color.N60};
+
+    ${media.mobile} {
+        font-size: 32px;
+    } 
+
+`;
+
+const MainBottomContentContainer = styled.div`
+    margin-left: 92px;
+    padding-top: 114px;
+    display: flex;
+    flex-direction: row;
+
+    ${media.mobile} {
+        margin-left: 0px;
+        padding-top: 52px;
+        flex-wrap: wrap;
+    }
+`;
+
+const MainBottomDescriptionContainer = styled.div`
+    width: 50%;
+`;
+
+const MainBottomDescriptionTitle = styled.span`
+    font-size: 18px;
+    font-weight: 600;
+    color: ${color.N50};
+
+
+`;
+
+const MainBottomDescriptionContentContainer = styled.div`
+    margin-top: 14px;
+`;
+
+const MainBottomDescriptionContent = styled.span`
+    font-size: 13px;
+    font-weight: 400;
+    color: ${color.N60};
 `;
 
 
@@ -635,11 +729,14 @@ const Home = ({ data }: IProps) => {
                         </ValueCard>
                     </VisionContainer>
                 </VisionSection>
-                {/* <HistorySection>
+                <HistorySection>
                     <HistoryContainer>
                         <HistoryInnerContainer>
-                            <TextBadge />
-                            <HistoryText>History</HistoryText>
+                            <HisotryBadgeTextContainer>
+                                <TextBadge />
+                                <HistoryText>History</HistoryText>
+                            </HisotryBadgeTextContainer>
+
                             {data?.histories.map((hi, key) =>
                                 <HistoryContentContainer key={key} index={key}>
                                     <HisotryContentTitleContainer>
@@ -662,48 +759,48 @@ const Home = ({ data }: IProps) => {
                     </HistoryContainer>
                 </HistorySection>
                 <MainSectionBottom>
-                    <div style={{ display: 'flex', flexDirection: 'row', maxWidth: 1100, margin: 'auto', padding: '76px 0px 68px 0px' }}>
+                    <MainBottomContainer>
                         <div>
-                            <span style={{ fontSize: 45, fontWeight: 700, color: color.N60 }}>Contact us !</span>
+                            <MainBottomTitle>Contact us !</MainBottomTitle>
                         </div>
-                        <div style={{ marginLeft: 92, paddingTop: 114, display: 'flex', flexDirection: 'row', }}>
-                            <div>
-                                <span style={{ fontSize: 18, fontWeight: 600, color: color.N60 }}>Address</span>
-                                <div style={{ marginTop: 14 }}>
-                                    <span style={{ fontSize: 13, fontWeight: 400, color: color.N60 }}>Hongseong. Korea</span>
-                                </div>
-                            </div>
-                            <div style={{ marginLeft: 56 }}>
-                                <span style={{ fontSize: 18, fontWeight: 600, color: color.N60 }}>Email</span>
-                                <div style={{ marginTop: 14 }}>
-                                    <span style={{ fontSize: 13, fontWeight: 400, color: color.N60 }}>nabilera2020@naver.com</span>
-                                </div>
-                            </div>
-                            <div style={{ marginLeft: 56 }}>
-                                <span style={{ fontSize: 18, fontWeight: 600, color: color.N60 }}>Tel</span>
-                                <div style={{ marginTop: 14 }}>
-                                    <span style={{ fontSize: 13, fontWeight: 400, color: color.N60 }}>041-406-8998</span>
-                                </div>
-                            </div>
-                            <div style={{ marginLeft: 56 }}>
-                                <span style={{ fontSize: 18, fontWeight: 600, color: color.N60 }}>SNS</span>
-                                <div style={{ marginTop: 14 }}>
-                                    <span style={{ fontSize: 13, fontWeight: 400, color: color.N60 }}>Instagram</span>
-                                </div>
-                                <div style={{ marginTop: 12 }}>
-                                    <span style={{ fontSize: 13, fontWeight: 400, color: color.N60 }}>Facebook</span>
-                                </div>
-                                <div style={{ marginTop: 12 }}>
-                                    <span style={{ fontSize: 13, fontWeight: 400, color: color.N60 }}>Blog</span>
-                                </div>
-                                <div style={{ marginTop: 12 }}>
-                                    <span style={{ fontSize: 13, fontWeight: 400, color: color.N60 }}>Youtube</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        <MainBottomContentContainer>
+                            <MainBottomDescriptionContainer>
+                                <MainBottomDescriptionTitle>Address</MainBottomDescriptionTitle>
+                                <MainBottomDescriptionContentContainer>
+                                    <MainBottomDescriptionContent>Hongseong. Korea</MainBottomDescriptionContent>
+                                </MainBottomDescriptionContentContainer>
+                            </MainBottomDescriptionContainer>
+                            <MainBottomDescriptionContainer>
+                                <MainBottomDescriptionTitle>Email</MainBottomDescriptionTitle>
+                                <MainBottomDescriptionContentContainer>
+                                    <MainBottomDescriptionContent>nabilera2020@naver.com</MainBottomDescriptionContent>
+                                </MainBottomDescriptionContentContainer>
+                            </MainBottomDescriptionContainer>
+                            <MainBottomDescriptionContainer>
+                                <MainBottomDescriptionTitle>Tel</MainBottomDescriptionTitle>
+                                <MainBottomDescriptionContentContainer>
+                                    <MainBottomDescriptionContent>041-406-8998</MainBottomDescriptionContent>
+                                </MainBottomDescriptionContentContainer>
+                            </MainBottomDescriptionContainer>
+                            <MainBottomDescriptionContainer>
+                                <MainBottomDescriptionTitle>SNS</MainBottomDescriptionTitle>
+                                <MainBottomDescriptionContentContainer>
+                                    <MainBottomDescriptionContent>Instagram</MainBottomDescriptionContent>
+                                </MainBottomDescriptionContentContainer>
+                                <MainBottomDescriptionContentContainer>
+                                    <MainBottomDescriptionContent>Facebook</MainBottomDescriptionContent>
+                                </MainBottomDescriptionContentContainer>
+                                <MainBottomDescriptionContentContainer>
+                                    <MainBottomDescriptionContent>Blog</MainBottomDescriptionContent>
+                                </MainBottomDescriptionContentContainer>
+                                <MainBottomDescriptionContentContainer>
+                                    <MainBottomDescriptionContent>Youtube</MainBottomDescriptionContent>
+                                </MainBottomDescriptionContentContainer>
+                            </MainBottomDescriptionContainer>
+                        </MainBottomContentContainer>
+                    </MainBottomContainer>
 
-                </MainSectionBottom> */}
+                </MainSectionBottom>
             </Container>
             <Footer />
         </div >
