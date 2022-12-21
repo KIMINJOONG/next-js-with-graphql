@@ -341,6 +341,13 @@ const VisionContainer = styled.div`
     }
 `;
 
+const MissionCardContainer = styled.div`
+    ${media.mobile} {
+        display: flex;
+        justify-content: ${(props: { justifyContent: string }) => props.justifyContent};
+    }
+`;
+
 const MissionCard = styled.div`
     position: absolute;
     top: 132px;
@@ -711,44 +718,52 @@ const Home = ({ data }: IProps) => {
                             <HR left={'70.2%'} borderColor={'#625E5C'} />
                             <HR left={'100%'} borderColor={'#625E5C'} />
                         </div>
-                        <MissionCard>
-                            <MissionCardImageContainer>
-                                <MissionCardImage src={require('../../assets/images/mission.png')} alt={'main'} />
-                            </MissionCardImageContainer>
-                            <CardContentContainer>
-                                <CardContentTitle>미션</CardContentTitle>
-                                <CardContentDescription>
-                                    지역의 문화자원을 창의적 사고와 끝없는 도전을 통해 콘텐츠를 개발함으로써 지역의 문화를 바꾼다.
-                                </CardContentDescription>
-                            </CardContentContainer>
-                        </MissionCard>
-
-
-                        <VisionCard>
-                            <VisionCardImageContainer>
-                                <VisionCardImage src={require('../../assets/images/vision.png')} alt={'main'} />
-                            </VisionCardImageContainer>
-                            <CardContentContainer>
-                                <CardContentTitle>비전</CardContentTitle>
-                                <CardContentDescription>
-                                    지역 역사와 문화를 통해 공간을 재생하여 국내 및 해외 관광객들에게 지역 문화 콘텐츠 제공
-                                </CardContentDescription>
-                            </CardContentContainer>
-                        </VisionCard>
+                        <MissionCardContainer justifyContent="flex-start">
+                            <MissionCard>
+                                <MissionCardImageContainer>
+                                    <MissionCardImage src={require('../../assets/images/mission.png')} alt={'main'} />
+                                </MissionCardImageContainer>
+                                <CardContentContainer>
+                                    <CardContentTitle>미션</CardContentTitle>
+                                    <CardContentDescription>
+                                        지역의 문화자원을 창의적 사고와 끝없는 도전을 통해 콘텐츠를 개발함으로써 지역의 문화를 바꾼다.
+                                    </CardContentDescription>
+                                </CardContentContainer>
+                            </MissionCard>
+                        </MissionCardContainer>
 
 
 
-                        <ValueCard>
-                            <ValueCardImageContainer>
-                                <ValueCardImage src={require('../../assets/images/value.png')} alt={'main'} />
-                            </ValueCardImageContainer>
-                            <CardContentContainer>
-                                <CardContentTitle>가치</CardContentTitle>
-                                <CardContentDescription>
-                                    #지역 #문화 #재생
-                                </CardContentDescription>
-                            </CardContentContainer>
-                        </ValueCard>
+
+                        <MissionCardContainer justifyContent="flex-end">
+                            <VisionCard>
+                                <VisionCardImageContainer>
+                                    <VisionCardImage src={require('../../assets/images/vision.png')} alt={'main'} />
+                                </VisionCardImageContainer>
+                                <CardContentContainer>
+                                    <CardContentTitle>비전</CardContentTitle>
+                                    <CardContentDescription>
+                                        지역 역사와 문화를 통해 공간을 재생하여 국내 및 해외 관광객들에게 지역 문화 콘텐츠 제공
+                                    </CardContentDescription>
+                                </CardContentContainer>
+                            </VisionCard>
+                        </MissionCardContainer>
+
+
+
+                        <MissionCardContainer justifyContent="flex-start">
+                            <ValueCard>
+                                <ValueCardImageContainer>
+                                    <ValueCardImage src={require('../../assets/images/value.png')} alt={'main'} />
+                                </ValueCardImageContainer>
+                                <CardContentContainer>
+                                    <CardContentTitle>가치</CardContentTitle>
+                                    <CardContentDescription>
+                                        #지역 #문화 #재생
+                                    </CardContentDescription>
+                                </CardContentContainer>
+                            </ValueCard>
+                        </MissionCardContainer>
                     </VisionContainer>
                 </VisionSection>
                 <HistorySection>
