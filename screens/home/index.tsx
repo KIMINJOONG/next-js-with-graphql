@@ -218,6 +218,8 @@ const NewsImageContainer = styled.div`
     ${media.mobile} {
         order: 2;
         margin-top: 65px;
+        display: flex;
+        justify-content: center;
     }
 `;
 
@@ -338,6 +340,7 @@ const VisionContainer = styled.div`
     ${media.mobile} {
         max-width: 576px;
         height: 1085px;
+        padding-top: 150px;
     }
 `;
 
@@ -614,6 +617,9 @@ const MainBottomContentContainer = styled.div`
 
 const MainBottomDescriptionContainer = styled.div`
     width: 50%;
+    ${media.mobile} {
+        margin-top: 68px;
+    }
 `;
 
 const MainBottomDescriptionTitle = styled.span`
@@ -711,7 +717,7 @@ const Home = ({ data }: IProps) => {
 
                 </NewsSection>
                 <VisionSection>
-                    <VisionContainer style={{}}>
+                    <VisionContainer>
                         <div style={{ zIndex: 1 }}>
                             <HR left={'0%'} borderColor={'#625E5C'} />
                             <HR left={'33.6%'} borderColor={'#625E5C'} />
