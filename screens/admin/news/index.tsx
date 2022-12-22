@@ -158,7 +158,7 @@ const NewsScreen = () => {
                 </TableBody>
             </Table>
             <NPaginationContainer>
-                <Pagination page={page + 1} count={totalCount} variant="outlined" shape="rounded" onChange={(e, page) => fetchNews(paged - 1)} />
+                <Pagination page={page + 1} count={totalCount} variant="outlined" shape="rounded" onChange={(e, page) => fetchNews(page - 1)} />
             </NPaginationContainer>
         </NewsContainer >
         <Dialog
