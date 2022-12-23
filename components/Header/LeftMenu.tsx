@@ -83,10 +83,10 @@ const LeftMenuComponent = ({setOpen, ...rest}: any) => {
                     </ul>
                 </AccordionDetails>
             </CustomAccordion>
-            <Link className="link-path" href={'/news'}>
+            <Link className="link-path" href={'/news'} onClick={() => setOpen(false)}>
                 <span className="sub-title">NEWS</span>
             </Link>
-            <Link className="link-path" href={'/contact'}>
+            <Link className="link-path" href={'/contact'} onClick={() => setOpen(false)}>
                 <span className="sub-title">CONTACT</span>
             </Link>
         </div>
