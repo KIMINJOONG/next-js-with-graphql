@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useState } from "react"
 import styled from "styled-components"
 import { color } from "styles/theme";
+import PlusMinusComponent from "./PlusMinus";
 
 const LeftMenuContainer = styled.div`
     height: 100%; /* 100% Full-height */
@@ -29,6 +30,10 @@ const LeftMenuContainer = styled.div`
         font-weight: 600;
         font-size: 32px;
     }
+    .project-title {
+        display: flex;
+        align-items: center;
+    }
     ul {
         li {
             color: ${color.N55};
@@ -47,10 +52,6 @@ const LeftMenuContainer = styled.div`
 const CustomAccordion = styled((props: AccordionProps) => (
     <Accordion disableGutters elevation={0} square {...props} />
   ))(({ theme }) => ({
-    // border: `1px solid ${theme.palette?.divider}`,
-    // '&:not(:last-child)': {
-    //   borderBottom: 0,
-    // },
     '&:before': {
       display: 'none',
     },
@@ -66,7 +67,7 @@ const LeftMenuComponent = ({setOpen, ...rest}: any) => {
         <div className="left-area">
             <CustomAccordion expanded={openProject} onChange={() => setOpenProject(!openProject)}>
                 <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
-                <span className="sub-title">PROJECT</span>
+                <span className="sub-title project-title">PROJECT<PlusMinusComponent open={openProject}/></span>
                 </AccordionSummary>
                 <AccordionDetails>
                     <ul>
