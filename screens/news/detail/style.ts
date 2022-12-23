@@ -57,6 +57,7 @@ export const DetailContainer = styled.div`
                 margin-top: 46px;
                 margin-bottom: 33px;
             }
+            white-space: pre-wrap;
         }
     }
     .button-area {
