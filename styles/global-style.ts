@@ -1,15 +1,15 @@
 import { createGlobalStyle } from 'styled-components';
-import { color, media } from './theme';
+import { color, media, size } from './theme';
 
 export const GlobalStyle = createGlobalStyle`
     html, body {
-    padding: 0;
-    margin: 0;
-    font-family: Pretendard;
+        padding: 0;
+        margin: 0;
+        font-family: Pretendard;
     }
 
     /* width */
-    ::-webkit-scrollbar {
+    /* ::-webkit-scrollbar {
         width: 13px;
     }
     
@@ -17,8 +17,8 @@ export const GlobalStyle = createGlobalStyle`
     ::-webkit-scrollbar-thumb {
         background: ${color.brand}; 
         border-radius: 26px;
-    }
-
+    } */
+    
     h1 {
        font-weight: 600;
        color: ${color.N55};

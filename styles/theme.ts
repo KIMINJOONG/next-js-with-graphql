@@ -2,13 +2,20 @@
 const customMediaQuery = (maxWidth: number): string => `@media (max-width: ${maxWidth}px)`;
 const customMediaQueryMin = (minWidth: number): string => `@media (min-width: ${minWidth}px)`;
 
+export const size = {
+  pc: 1200,
+  container: 1100,
+  tablet: 768,
+  mobile: 576,
+}
+
 export const media = {
   custom: customMediaQuery,
   pc: customMediaQuery(1200),
   pcMin: customMediaQueryMin(768), //768이상만
   header: customMediaQuery(1100), //header만
-  tablet: customMediaQuery(768),
-  mobile: customMediaQuery(576),
+  tablet: customMediaQuery(size.tablet),
+  mobile: customMediaQuery(size.mobile),
 };
 
 export const color = {
@@ -32,8 +39,3 @@ export const color = {
   N55: '#1F1E1D',
   N60: '#181817',
 };
-
-
-export const size = {
-  container: 1100
-}

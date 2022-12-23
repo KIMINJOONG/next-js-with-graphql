@@ -8,11 +8,13 @@ export const MainSectionBottom = styled.section`
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 67%;
+  display: flex;
+  align-items: center;
 
   ${media.mobile} {
     height: 494px;
     background-position: 60%;
-
+    background-image: url('images/main_bottom_background_mobile.png');
   }
 `;
 
@@ -130,11 +132,10 @@ export const MainImageContainer = styled.div`
 `;
 
 export const MainImage = styled(Image)`
-    width: 1100px; 
+    width: 100%;
     height: 438px;
-
+    object-fit: cover;
     ${media.mobile} {
-        width: 100%;
         height: 387px;
     }
 `;
@@ -557,14 +558,22 @@ export const MainBottomContainer = styled.div`
     max-width: 1100px;
     margin: auto;
     padding: 76px 0px 68px 0px;
+    width: 100%;
 
+    .contact-us {
+        flex: 1;
+    }
     ${media.mobile} {
         flex-direction: column;
-        padding: 72px 0px 75px 14px;
+        padding-top: 72px;
+        padding-left: 14px;
+        padding-right: 14px;
     }
+
+    
 `;
 
-export const MainBottomTitle = styled.span`
+export const MainBottomTitle = styled.div`
     font-size: 45px;
     font-weight: 700;
     color: ${color.N60};
@@ -580,18 +589,25 @@ export const MainBottomContentContainer = styled.div`
     padding-top: 114px;
     display: flex;
     flex-direction: row;
+    flex: 2;
 
     ${media.mobile} {
         margin-left: 0px;
-        padding-top: 52px;
+        padding-top: 0px;
+        display: flex;
         flex-wrap: wrap;
+        flex-direction: row;
     }
 `;
 
 export const MainBottomDescriptionContainer = styled.div`
-    width: 50%;
+    flex: 1;
     ${media.mobile} {
-        margin-top: 68px;
+        margin-top: 58px;
+        display: flex; 
+        flex-basis: 50%;
+        justify-content: start;
+        flex-direction: column;
     }
 `;
 

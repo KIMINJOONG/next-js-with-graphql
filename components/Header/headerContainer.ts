@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { color } from "styles/theme";
+import { color, media } from "styles/theme";
 
 export const HeaderContainer = styled.nav`
     position: fixed;
@@ -17,6 +17,11 @@ export const HeaderContainer = styled.nav`
             display: flex;
             height: 100%;
             align-items: center;
+            > a {
+                ${media.mobile} {
+                    margin-left: 30px;
+                }
+            }
             .menus {
                 display: flex;
                 height: 100%;

@@ -194,7 +194,7 @@ const Home = ({ data }: IProps) => {
                 </HistorySection>
                 <MainSectionBottom>
                     <MainBottomContainer>
-                        <div>
+                        <div className="contact-us">
                             <MainBottomTitle>Contact us !</MainBottomTitle>
                         </div>
                         <MainBottomContentContainer>
