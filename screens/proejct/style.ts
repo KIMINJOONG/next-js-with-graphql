@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { color, size } from "styles/theme";
+import { color, media, size } from "styles/theme";
 
 export const ProjectContainer = styled.div`
     max-width: ${size.container}px;
@@ -80,6 +80,7 @@ export const ProjectContainer = styled.div`
             > img {
                 height: 389px;
                 width: 277px;
+                object-fit: cover;
             }
             .poster-content {
                 padding-top: 23px;
@@ -128,6 +129,7 @@ export const ProjectContainer = styled.div`
                         width: 154px;
                         height: 114px;
                         margin-right: 18px;
+                        object-fit: cover;
                     }
                     img:last-child {
                         margin-right: 0px;
@@ -139,5 +141,65 @@ export const ProjectContainer = styled.div`
             margin-bottom: 0px;
         }
     }
-
+    ${media.mobile} {
+        h1 {
+            margin-top: 37px;
+            margin-bottom: 37px;
+            > span {
+                font-size: 32px;
+                .circle-cut {
+                    width: 38px;
+                    height: 38px;
+                    right: -15px;
+                }
+            }
+        }
+        .tab-nav {
+            display: flex;
+            border-bottom:2px solid ${color.N60};
+            margin-bottom: 0px;
+            li {
+                flex: 1;
+                border-left: 0px;
+                a {
+                    width: auto;
+                }
+            }
+            li:last-child {
+                border-right: 0px;
+            }
+        }
+        .tab-content {
+            margin-bottom: 47px;
+            .tab-content-item {
+                border-top: 0px;
+                border-left: 0px;
+                border-right: 0px;
+                border-bottom: 1px solid ${color.N20};
+                flex-direction: column;
+                padding: 54px 32px 30px 32px;
+                align-items: center;
+                margin-bottom: 0px;
+                .poster-content {
+                    width: 100%;
+                    padding-top: 25px;
+                    padding-left: 0px;
+                    .poster-title {
+                        margin-bottom: 30px;
+                    }
+                    .content-images {
+                        overflow-x: scroll;
+                        img {
+                            width: 171px;
+                            height: 127px;
+                            margin-right: 6px;
+                        }
+                    }
+                }
+            }
+            .tab-content-item:last-child {
+                border-bottom: 0px
+            }
+        }
+    }
 `
