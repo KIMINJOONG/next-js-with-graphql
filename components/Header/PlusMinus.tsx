@@ -5,11 +5,11 @@ import { color } from "styles/theme"
 const PlusMinusContainer = styled.div`
     .closed {
     .vertical {
-        transition: all 0.5s ease-in-out;
+        transition: all 0.3s ease-in-out;
         transform: rotate(-90deg);
     }
     .horizontal {
-        transition: all 0.5s ease-in-out;
+        transition: all 0.3s ease-in-out;
         transform: rotate(-90deg);
         opacity: 1;
     }
@@ -18,11 +18,11 @@ const PlusMinusContainer = styled.div`
     .opened {
     opacity: 1;
     .vertical {
-        transition: all 0.5s ease-in-out;
+        transition: all 0.3s ease-in-out;
         transform: rotate(90deg);
     }
     .horizontal {
-        transition: all 0.5s ease-in-out;
+        transition: all 0.3s ease-in-out;
         transform: rotate(90deg);
         opacity: 0;
     }

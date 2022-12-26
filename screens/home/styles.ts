@@ -561,6 +561,7 @@ export const MainBottomContainer = styled.div`
     width: 100%;
 
     .contact-us {
+        display: inline-block;
         flex: 1;
     }
     ${media.mobile} {
@@ -585,7 +586,6 @@ export const MainBottomTitle = styled.div`
 `;
 
 export const MainBottomContentContainer = styled.div`
-    margin-left: 92px;
     padding-top: 114px;
     display: flex;
     flex-direction: row;

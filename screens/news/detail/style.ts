@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { color, size } from "styles/theme";
+import { color, media, size } from "styles/theme";
 
 export const DetailContainer = styled.div`
     max-width: ${size.container}px;
@@ -40,6 +40,7 @@ export const DetailContainer = styled.div`
                 font-weight: 500;
             }
             p {
+                font-family: Pretendard;
                 font-size: 15px;
                 font-weight: 400;
                 margin-bottom: 40px;
@@ -73,6 +74,44 @@ export const DetailContainer = styled.div`
             color: ${color.N60};
             border-radius: 0;
             border: 1px solid ${color.N60}
+        }
+    }
+    ${media.mobile} {
+        padding-top: 23px;
+        h1 {
+            font-size: 32px;
+            > span {
+                .circle-cut {
+                    width: 82px;
+                    height: 41px;
+                    right: 71px;
+                    top: -12px;
+                }
+            }
+        }
+        .content-area {
+            margin-top: 80px;
+            margin-left: 15px;
+            margin-right: 15px;
+            .content-title {
+                h2 {
+                    margin-top: 37px;
+                    margin-bottom: 28px;
+                }
+                p {
+                    margin-bottom: 37px;
+                }
+            }
+            .content-item {
+                .content-margin {
+                    margin-top: 30px;
+                    margin-bottom: 30px;
+                }
+            }
+        }
+        .button-area {
+            margin-top: 48px;
+            margin-bottom: 68px;
         }
     }
 `
