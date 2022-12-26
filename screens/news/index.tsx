@@ -159,7 +159,7 @@ const NewsScreen = ({ data }: IProps) => {
                 <div className="list-area">
                     {isMobile ?
                         <ul>
-                            {list.map((item, key) => <li key={key}>
+                            {list.map((item, key) => <li key={key} onClick={() => router.push(`/news/detail?idx=${item.idx}`)}>
                                 <div className="list-mobile">
                                     <p>
                                         {item.title}
