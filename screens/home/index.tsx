@@ -4,6 +4,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import moment from 'moment'
 import { CardContentContainer, CardContentDescription, CardContentTitle, Container, HisotryBadgeTextContainer, HisotryContentDescription, HisotryContentDescriptionContainer, HisotryContentTitle, HisotryContentTitleContainer, HistoryContainer, HistoryContentContainer, HistoryInnerContainer, HistorySection, HistoryText, HR, HRContainer, MainBanner, MainBannerContainer, MainBannerText, MainBottomContainer, MainBottomContentContainer, MainBottomDescriptionContainer, MainBottomDescriptionContent, MainBottomDescriptionContentContainer, MainBottomDescriptionTitle, MainBottomTitle, MainImage, MainImageContainer, MainSectionBottom, MainTextContainer, MainTextImage, MissionCard, MissionCardContainer, MissionCardImage, MissionCardImageContainer, NewsBadgeTextContainer, NewsContentContainer, NewsContentDate, NewsContentLi, NewsContentTitle, NewsContentUl, NewsImage, NewsImageContainer, NewsSection, NewsSectionContainer, NewsText, TextBadge, TopSection, TopSectionContainer, TopSectionContentContainer, TopSectionContentDescription, TopSectionContentDescriptionContainer, TopSectionContentTitle, ValueCard, ValueCardImage, ValueCardImageContainer, VisionCard, VisionCardImage, VisionCardImageContainer, VisionContainer, VisionSection } from "./styles";
+import { useCallback } from "react";
 
 
 interface INews {
@@ -34,6 +35,9 @@ interface IProps {
 
 
 const Home = ({ data }: IProps) => {
+    const onClickSocial = useCallback((url: string) => {
+        window.open(url);
+    }, []);
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
 
@@ -213,22 +217,22 @@ const Home = ({ data }: IProps) => {
                             <MainBottomDescriptionContainer>
                                 <MainBottomDescriptionTitle>Tel</MainBottomDescriptionTitle>
                                 <MainBottomDescriptionContentContainer>
-                                    <MainBottomDescriptionContent>041-406-8998</MainBottomDescriptionContent>
+                                    <MainBottomDescriptionContent style={{cursor: 'pointer'}} onClick={() => window.open('tel:0414068998')}>041-406-8998</MainBottomDescriptionContent>
                                 </MainBottomDescriptionContentContainer>
                             </MainBottomDescriptionContainer>
                             <MainBottomDescriptionContainer>
                                 <MainBottomDescriptionTitle>SNS</MainBottomDescriptionTitle>
                                 <MainBottomDescriptionContentContainer>
-                                    <MainBottomDescriptionContent>Instagram</MainBottomDescriptionContent>
+                                    <MainBottomDescriptionContent style={{cursor: 'pointer'}} onClick={() => onClickSocial('https://instagram.com/nabilera.official?igshid=YmMyMTA2M2Y=')}>Instagram</MainBottomDescriptionContent>
                                 </MainBottomDescriptionContentContainer>
                                 <MainBottomDescriptionContentContainer>
-                                    <MainBottomDescriptionContent>Facebook</MainBottomDescriptionContent>
+                                    <MainBottomDescriptionContent style={{cursor: 'pointer'}} onClick={() => onClickSocial('https://www.facebook.com/nabilera.official?mibextid=ZbWKwL')}>Facebook</MainBottomDescriptionContent>
                                 </MainBottomDescriptionContentContainer>
                                 <MainBottomDescriptionContentContainer>
-                                    <MainBottomDescriptionContent>Blog</MainBottomDescriptionContent>
+                                    <MainBottomDescriptionContent style={{cursor: 'pointer'}} onClick={() => onClickSocial('https://m.blog.naver.com/PostList.naver?blogId=nabilera2020')}>Blog</MainBottomDescriptionContent>
                                 </MainBottomDescriptionContentContainer>
                                 <MainBottomDescriptionContentContainer>
-                                    <MainBottomDescriptionContent>Youtube</MainBottomDescriptionContent>
+                                    <MainBottomDescriptionContent style={{cursor: 'pointer'}} onClick={() => onClickSocial('https://youtube.com/channel/UC69_LSbhYcZFuaprQuXkFnA')}>Youtube</MainBottomDescriptionContent>
                                 </MainBottomDescriptionContentContainer>
                             </MainBottomDescriptionContainer>
                         </MainBottomContentContainer>

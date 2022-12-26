@@ -2,9 +2,9 @@ import Header from "components/Header"
 import HeadMeta from "components/Header/HeadMeta"
 import { CustomTextFiled } from "components/TextField"
 import { useEffect, useRef, useState } from "react"
-import { color } from "styles/theme"
+import { color, size } from "styles/theme"
 import { NewsContainer } from "./style"
-import { InputAdornment, Table, TableHead, TableBody, TableRow, TableCell, Pagination } from "@mui/material";
+import { InputAdornment, Table, TableHead, TableBody, TableRow, TableCell, Pagination, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router"
 import Footer from "components/Footer"
 import { NPaginationContainer } from "components/pagination"
@@ -119,6 +119,8 @@ const NewsScreen = ({ data }: IProps) => {
         setLoading(false)
     }
 
+    const isMobile = useMediaQuery(`(max-width : ${size.mobile}px)`);
+
     return <div ref={ref} style={{ marginRight: existScroll ? 0 : 0 }}>
         <HeadMeta title={`나빌레라 : 뉴스`} />
         <Header type={2} />
@@ -133,6 +135,7 @@ const NewsScreen = ({ data }: IProps) => {
                 <div className="search-area">
                     <CustomTextFiled
                         value={keyword}
+                        fullWidth={isMobile}
                         placeholder="검색어를 입력해주세요."
                         onChange={onChangeKeyword}
                         style={{ background: color.N10, height: 48 }}
@@ -154,36 +157,49 @@ const NewsScreen = ({ data }: IProps) => {
                     />
                 </div>
                 <div className="list-area">
-                    <Table>
-                        <TableHead className="table-head">
-                            <TableRow>
-                                {menus.map((menu, key) => <TableCell width={menu.width} className={`table-head-cell ${menu.class}`} key={key}>
-                                    {menu.name}
-                                </TableCell>)}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody className="table-body">
-                            {list.map((li, key) => <TableRow key={key} onClick={() => router.push(`/news/detail?idx=${li.idx}`)}>
-                                <TableCell className="table-body-cell index">
-                                    {li.idx}
-                                </TableCell>
-                                <TableCell className="table-body-cell">
-                                    {li.category}
-                                </TableCell>
-                                <TableCell className="table-body-cell left">
-                                    {li.title}
-                                </TableCell>
-                                <TableCell className="table-body-cell left light">
-                                    {moment(li.created_at).format('YYYY-MM-DD')}
-                                </TableCell>
-                                <TableCell className="table-body-cell light">
-                                    {li.views}
-                                </TableCell>
-                            </TableRow>)}
-                        </TableBody>
-                    </Table>
+                    {isMobile ?
+                        <ul>
+                            {list.map((item, key) => <li key={key}>
+                                <div className="list-mobile">
+                                    <p>
+                                        {item.title}
+                                    </p>
+                                    <p className="mobile-create">
+                                        {moment(item.created_at).format('YYYY-MM-DD')}
+                                    </p>
+                                </div>
+                            </li>)}
+                        </ul> :
+                        <Table>
+                            <TableHead className="table-head">
+                                <TableRow>
+                                    {menus.map((menu, key) => <TableCell width={menu.width} className={`table-head-cell ${menu.class}`} key={key}>
+                                        {menu.name}
+                                    </TableCell>)}
+                                </TableRow>
+                            </TableHead>
+                            <TableBody className="table-body">
+                                {list.map((li, key) => <TableRow key={key} onClick={() => router.push(`/news/detail?idx=${li.idx}`)}>
+                                    <TableCell className="table-body-cell index">
+                                        {li.idx}
+                                    </TableCell>
+                                    <TableCell className="table-body-cell">
+                                        {li.category}
+                                    </TableCell>
+                                    <TableCell className="table-body-cell left">
+                                        {li.title}
+                                    </TableCell>
+                                    <TableCell className="table-body-cell left light">
+                                        {moment(li.created_at).format('YYYY-MM-DD')}
+                                    </TableCell>
+                                    <TableCell className="table-body-cell light">
+                                        {li.views}
+                                    </TableCell>
+                                </TableRow>)}
+                            </TableBody>
+                        </Table>}
                 </div>
-                <NPaginationContainer>
+                <NPaginationContainer className="list-page">
                     <Pagination page={page + 1} count={totalCount} variant="outlined" shape="rounded" onChange={(e, page) => fetchNews(page - 1)} />
                 </NPaginationContainer>
             </div>

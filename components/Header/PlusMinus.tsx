@@ -48,7 +48,6 @@ const PlusMinusContainer = styled.div`
         left: 50%;
         margin-left: -10px;
         top: 50%;
-        margin-top: -3.5px;
         border-radius: 5px;
     }
     .circle-plus .circle .vertical {
@@ -59,7 +58,7 @@ const PlusMinusContainer = styled.div`
         left: 50%;
         margin-left: -2.5px;
         top: 50%;
-        margin-top: -12px;
+        margin-top: -8px;
         border-radius: 5px;
     }
 

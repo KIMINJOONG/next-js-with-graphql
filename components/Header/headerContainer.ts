@@ -112,5 +112,8 @@ export const HeaderContainer = styled.nav`
             }
         }
     }
+    ${media.mobile} {
+        border-bottom: 0;
+    }
 
 `

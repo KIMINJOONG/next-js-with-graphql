@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { color, size } from "styles/theme";
+import { color, media, size } from "styles/theme";
 
 export const NewsContainer = styled.div`
     max-width: ${size.container}px;
@@ -71,6 +71,51 @@ export const NewsContainer = styled.div`
                 }
             }
             
+        }
+    }
+
+    ${media.mobile} {
+        padding-top: 23px;
+        h1 {
+            font-size: 32px;
+            > span {
+                .circle-cut {
+                    width: 82px;
+                    height: 41px;
+                    right: 71px;
+                    top: -12px;
+                }
+            }
+        }
+
+        .content-area {
+            .search-area {
+                margin-left: 37px;
+                margin-right: 37px;
+                margin-bottom: 37px;
+            }
+
+            .list-area {
+                margin-left: 15px;
+                margin-right: 15px;
+                .list-mobile {
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                    .mobile-create {
+                        margin-top: 10px;
+                        color: ${color.N25};
+                        font-family: Pretendard;
+                        font-size: 13px;
+                        font-weight: 300;
+                    }
+                    border-bottom: 1px solid ${color.N20};
+                }
+            }
+
+            .list-page {
+                margin-top: 50px;
+                margin-bottom: 80px;
+            }
         }
     }
 `

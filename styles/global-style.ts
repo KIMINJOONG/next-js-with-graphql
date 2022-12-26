@@ -5,16 +5,16 @@ export const GlobalStyle = createGlobalStyle`
     html, body {
         padding: 0;
         margin: 0;
-        font-family: Pretendard;
+        font-family: Pretendard, Montserrat;
     }
 
     /* width */
     /* ::-webkit-scrollbar {
         width: 13px;
-    }
+    } */
     
     /* Handle */
-    ::-webkit-scrollbar-thumb {
+    /* ::-webkit-scrollbar-thumb {
         background: ${color.brand}; 
         border-radius: 26px;
     } */

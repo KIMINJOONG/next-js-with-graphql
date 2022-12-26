@@ -6,11 +6,13 @@ import { ThemeProvider as ThemeProviderLegacy } from "@mui/styles";
 import { ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { color } from "styles/theme";
+import '../public/fonts.css'
 
 const themeLight = createTheme({
   typography: {
     fontFamily: [
       'Pretendard',
+      'Montserrat'
     ].join(','),
   },
   palette: {
