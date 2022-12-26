@@ -163,6 +163,7 @@ export const ProjectContainer = styled.div`
                 border-left: 0px;
                 a {
                     width: auto;
+                    border-left : 1px solid ${color.N15};
                 }
             }
             li:last-child {
