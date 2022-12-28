@@ -36,6 +36,7 @@ export const NewsContainer = styled.div`
     ${media.tablet} {
         padding-left: 20px;
         padding-right: 20px;
+        padding-bottom: 80px;
         .n-table {
             
         }

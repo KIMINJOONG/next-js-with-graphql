@@ -4,7 +4,8 @@ const nextConfig = {
   swcMinify: true,
   env: {
     GOOGLE_API_KEY: process.env.GOOGLE_API_KEY,
-    GQL_DOMAIN: process.env.GQL_DOMAIN
+    GQL_DOMAIN: process.env.GQL_DOMAIN,
+    CLOUD_FRONT: process.env.CLOUD_FRONT
   },
 }
 
