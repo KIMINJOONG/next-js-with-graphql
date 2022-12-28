@@ -71,6 +71,10 @@ const gqlQuery = gql`
           ${gquery}
         `
 
+const preSignedQuery = `
+
+`
+
 
 const ProjectModifyScreen = ({ data }: IProps) => {
     const router = useRouter()
@@ -178,10 +182,8 @@ const ProjectModifyScreen = ({ data }: IProps) => {
     const mainImageRef = useRef<HTMLInputElement>(null);
 
     const uploadMainImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(121312)
         const files = e.target.files
         console.log(files)
-        console.log(mainImageRef.current)
         if(mainImageRef.current) {
             mainImageRef.current.value = ''
         }
