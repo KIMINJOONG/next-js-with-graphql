@@ -30,6 +30,7 @@ export const ProjectsContainer = styled.div`
         .main-image {
             display: flex;
             justify-content: center;
+            flex-direction: column;
             margin-top: 20px;
             margin-bottom: 20px;
             img {
@@ -38,17 +39,79 @@ export const ProjectsContainer = styled.div`
                 object-fit: cover;
             }
             .main-image-skeleton {
+                position: relative;
                 border: 5px dashed ${color.N25};
-                height: 389px;
-                width: 277px;
+                height: 399px;
+                width: 287px;
                 border-radius: 10px;
+                .remove {
+                    z-index: 100;
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+                    color: ${color.N25};
+                    cursor: pointer;
+                }
             }
+        }
+        .sub-image {
+            display: flex;
+            flex-direction: column;
+            .sub-image-row {
+                display: flex;
+                overflow-x: scroll;
+                .sub-image-item {
+                    position: relative;
+                    margin-right: 10px;
+                    border: 5px dashed ${color.N25};
+                    width: 163px;
+                    height: 124px;
+                    border-radius: 10px;
+                    img {
+                        min-width: 153px;
+                        height: 114px;
+                        object-fit: cover;
+                    }
+                }
+                .sub-image-item:last-child {
+                    margin-right: 0px;
+                }
+                
+                .sub-image-skeleton {
+                    border: 5px dashed ${color.N25};
+                    width: 163px;
+                    height: 124px;
+                    border-radius: 10px;
+                }
+
+                .remove {
+                    z-index: 100;
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+                    color: ${color.N25};
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .image-button {
+            span {
+                display: inline-block;
+                padding: 8px 22px;
+                background: ${color.brand};
+                border-radius: 4px;
+                color: white;
+                cursor: pointer;
+            }
+            margin-bottom: 20px;
         }
     }
     .n-btn {
         float: right;
         margin-top: 20px;
         width: 100px;
+        margin-bottom: 40px;
     }
     ${media.tablet} {
         padding-left: 20px;
@@ -61,8 +124,24 @@ export const ProjectsContainer = styled.div`
                     width: 277px;
                 }
                 .main-image-skeleton {
-                    height: 389px;
-                    width: 277px;
+                    height: 399px;
+                    width: 287px;
+                }
+            }
+            .sub-image {
+                .sub-image-row {
+                    .sub-image-item {
+                        width: 181px;
+                        height: 138px;
+                        img {
+                            min-width: 171px;
+                            height: 128px;
+                        }
+                    }
+                    .sub-image-skeleton {
+                        width: 181px;
+                        height: 138px;
+                    }
                 }
             }
         }

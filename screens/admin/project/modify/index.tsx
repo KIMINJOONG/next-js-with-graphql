@@ -2,12 +2,17 @@ import { gql } from "@apollo/client";
 import { Button, CircularProgress, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Snackbar, TextField, Typography, useMediaQuery } from "@mui/material"
 import Header from "components/Header"
 import { NameNode, OperationDefinitionNode } from "graphql";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, MouseEvent, useRef, useState } from "react";
 import { ProjectsContainer } from "../styles"
 import axiosInstance from "assets/apis/axiosInstance";
 import { CLOUD_FRONT, GQL_DOMAIN } from "assets/utils/ENV";
 import { ISanck } from "types/type";
 import { useRouter } from "next/router";
+import Axios from 'axios'
+import { autoHideDuration } from "constants/size";
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import PicSortComponent from "components/Sort";
+import { arrayMoveMutable } from 'array-move';
 
 interface ITypes {
     idx: number
@@ -16,7 +21,7 @@ interface ITypes {
 
 
 interface IProject {
-    idx: number
+    idx?: number
     type_idx: number
     title: string
     sub_title: string
@@ -29,10 +34,11 @@ interface IProject {
 }
 
 interface IImage {
-    idx: number
-    bucket: string
+    idx?: number
+    bucket?: string
     key: string
     list_order: number
+    file?: File
 }
 
 interface IProjectData {
@@ -44,19 +50,22 @@ interface IProps {
     data: IProjectData | undefined
 }
 
+interface ISignedData {
+    url: string
+    key: string
+    list_order: number
+
+}
+
 // modifiyNews(idx: Int, category_idx: Int! title: String!, content: String!
 
 const gquery = `
-    mutation modifiyProject($idx:Int, $category_idx:Int!, $title: String!, $content: String!) {
-        modifiyProject(idx:$idx, category_idx:$category_idx, title:$title, content: $content) {
+    mutation modifiyProject($project: ProjectInput!) {
+        modifiyProject(project:$project) {
             status
             token
             data {
                 idx
-                category_idx
-                title
-                content
-                created_at
             }
             error {
                 remark
@@ -72,16 +81,43 @@ const gqlQuery = gql`
         `
 
 const preSignedQuery = `
-
+    query preSignedQuery($exts: [ExtInput]) {
+        preSignedQuery(exts: $exts) {
+            status
+            token
+            data {
+                url
+                key
+                list_order
+            }
+            error {
+                remark
+                code
+                text
+            }
+        }
+    }
 `
+const preQuery = gql`${preSignedQuery}`
 
+const readFileAsync = (file: File) => {
+    return new Promise((resolve, reject) => {
+      let reader = new FileReader();
+
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+};
 
 const ProjectModifyScreen = ({ data }: IProps) => {
     const router = useRouter()
-    const [step, setStep] = useState(1)
+    const [step, setStep] = useState(0)
     const [loading, setLoading] = useState(false)
     const [project, setProject] = useState<IProject>(data?.project ?? {
-        idx: -1,
         type_idx: 1,
         title: '',
         sub_title: '',
@@ -92,6 +128,8 @@ const ProjectModifyScreen = ({ data }: IProps) => {
         support: '',
         images: []
     })
+
+    
 
     const isMobile = useMediaQuery('(max-width : 576px)');
 
@@ -149,7 +187,23 @@ const ProjectModifyScreen = ({ data }: IProps) => {
             openSnack('주최/주관을 입력해주세요')
             return
         }
+        if(project.images.length) {
+            if(project.images[0].list_order) {
+                openSnack('메인 이미지를 등록해주세요.')
+                return
+            }
+        }
+        if(project.images.length < 2) {
+            openSnack('서브 이미지를 등록해주세요.')
+            return
+        }
         setLoading(true)
+        const imageLogic = await uploadImage()
+        if(!imageLogic) {
+            setLoading(false)
+            openSnack('이미지 등록중 오류 발생')
+            return
+        }
         const innerQuery = gqlQuery.definitions[0] as OperationDefinitionNode;
         const { value } = innerQuery.name as NameNode;
 
@@ -158,21 +212,42 @@ const ProjectModifyScreen = ({ data }: IProps) => {
                 .post(`${GQL_DOMAIN}`, {
                     query: gquery,
                     variables: {
-                        project
+                        project : {
+                            idx: project.idx,
+                            type_idx: project.type_idx,
+                            title: project.title,
+                            sub_title: project.sub_title,
+                            when: project.when,
+                            location: project.location,
+                            organizer: project.organizer,
+                            operate: project.operate,
+                            support: project.support,
+                            images: project.images.map(img => {
+                                return {
+                                    idx: img.idx,
+                                    key: img.key,
+                                    list_order: img.list_order
+                                }
+                            })
+                        }
                     }
                 })
 
             const result = data.data[value].data
-            setProject(result)
-            if (project.idx === -1) {
-                router.replace(`/admin/project/modify?idx=${result.idx}`)
-                openSnack('뉴스 생성 완료')
+            setProject({
+                ...project,
+                ...result
+            })
+            if (project.idx) {
+                openSnack('프로젝트 수정 완료')
             } else {
-                openSnack('뉴스 수정 완료')
+                router.replace(`/admin/project/modify?idx=${result.idx}`)
+                openSnack('프로젝트 생성 완료')
             }
             setStep(1)
         } catch (e) {
-            openSnack('뉴스 생성주 오류 발생')
+            console.log(e)
+            openSnack('프로젝트 생성중 오류 발생')
         }
         setLoading(false)
     }
@@ -180,13 +255,134 @@ const ProjectModifyScreen = ({ data }: IProps) => {
     const awaitTimer = (ms: number) => new Promise(res => setTimeout(res, ms))
 
     const mainImageRef = useRef<HTMLInputElement>(null);
+    const subImageRef = useRef<HTMLInputElement>(null);
 
-    const uploadMainImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onChangeMainImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files
-        console.log(files)
+        if(!files) {
+            return
+        }
+        const result = await readFileAsync(files[0]);
+        if(result) {
+            project.images = [{key: result.toString(), list_order: 0, file: files[0]}, ...project.images.filter(img => img.list_order !== 0)]
+            setProject({
+                ...project
+            })
+        }
         if(mainImageRef.current) {
             mainImageRef.current.value = ''
         }
+    }
+
+    const onChangeSubImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const files = e.target.files
+        if(!files) {
+            return
+        }
+        const fileArray = Array.from(files)
+        const mutationFiles = await Promise.all(
+            fileArray.map(async (file, i) => {
+              const result = await readFileAsync(file);
+              return {
+                key: result?.toString(),
+                list_order: project.images.length + i,
+                file
+              };
+            })
+          );
+        project.images = [...project.images, ...(mutationFiles) as  Array<IImage>]
+        setProject({
+            ...project
+        })
+        if(subImageRef.current) {
+            subImageRef.current.value = ''
+        }
+    }
+
+    const uploadImage = async () : Promise<boolean> => {
+        const exts = project.images.filter(img => img.file).map(item => {
+            const name = item.file!.name;
+            const lastDot = name.lastIndexOf('.');
+
+            // const fileName = name.substring(0, lastDot);
+            const ext = name.substring(lastDot + 1);
+            return {
+                ext,
+                list_order: item.list_order
+            }
+        })
+
+        if(!exts.length) {
+            return true
+        }
+
+        const innerQuery = preQuery.definitions[0] as OperationDefinitionNode;
+        const { value } = innerQuery.name as NameNode;
+        try{
+            const { data } = await axiosInstance(value)
+            .post(`${GQL_DOMAIN}`, {
+                query: preSignedQuery,
+                variables: {
+                    exts: exts
+                }
+            })
+
+            const result = data.data[value].data as Array<ISignedData>
+            await Promise.all(
+                result.map(async(re) => {
+                    const image = project.images[re.list_order]
+                    await Axios({
+                        url: re.url,
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": image.file?.type,
+                        },
+                        data: image.file,
+                    });
+                    image.key = re.key
+                    delete image.file
+                })
+            )
+            return true
+        }catch(e) {
+            console.log(e)
+        }
+        return false
+    }
+
+    const onClickRemoveMainImage = (e: MouseEvent<HTMLDivElement>) => {
+        project.images = project.images.filter(img => img.list_order !== 0)
+        setProject({
+            ...project
+        })
+    }
+
+    const onClickRemoveSubImage = (index:number) => {
+        project.images.splice(index, 1)
+        setProject({
+            ...project,
+            images: project.images.map((img, idx) => {
+                return {
+                    ...img,
+                    list_order: idx
+                }
+            })
+        })
+    }
+
+    const onSortEnd = ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
+        const sortingArray = project.images.filter(img => img.list_order !== 0)
+        arrayMoveMutable(sortingArray, oldIndex, newIndex);
+        const concatArray = [project.images[0], ...sortingArray]
+        setProject({
+            ...project,
+            images: concatArray.map((img, index) => {
+                return {
+                    ...img,
+                    list_order: index
+                }
+            })
+        })
     }
 
     return <div>
@@ -198,106 +394,118 @@ const ProjectModifyScreen = ({ data }: IProps) => {
                 </Fragment> : '프로젝트 만들기'}</Typography>
             </div>
             <div className="n-field">
-                {step ? <Fragment>
-                    <div className="main-image">
-                        {project.images.length ? (
-                            project.images[0].list_order ? <label htmlFor="main-image">
-                                <input style={{ display: "none" }} ref={mainImageRef} onChange={uploadMainImage} type="file" accept="image/*" id="main-image" />
-                                <div className="main-image-skeleton"></div>
-                            </label> : <img src={CLOUD_FRONT + project.images[0].key}/>
-                        ) : <Fragment>
-                            <label htmlFor="main-image">
-                                <input style={{ display: "none" }} ref={mainImageRef} onChange={uploadMainImage} type="file" accept="image/*" id="main-image" />
-                                <div className="main-image-skeleton"></div>
-                            </label>
-                        </Fragment>}
+                <div className="title">
+                    <FormControl className="category">
+                        <InputLabel id="category">타입</InputLabel>
+                        <Select
+                            labelId="category"
+                            label="타입"
+                            value={project.type_idx}
+                            onChange={onChangeType}
+                        >
+                            {data?.types.map((ca, key) => <MenuItem key={key} value={ca.idx}>{ca.name}</MenuItem>)}
+                        </Select>
+                    </FormControl>
+                    <TextField
+                        fullWidth
+                        placeholder={'제목을 입력해주세요.'}
+                        label="제목"
+                        value={project.title}
+                        onChange={(e) => onChangeData(e, 'title')}
+                    />
+                </div>
+                <TextField
+                    title="content"
+                    label="부 제목"
+                    placeholder={'부 제목을 입력해주세요.'}
+                    value={project.sub_title}
+                    onChange={(e) => onChangeData(e, 'sub_title')}
+                />
+                <div style={{height: 20}}></div>
+                <TextField
+                    title="content"
+                    label="일시"
+                    placeholder={'일시를 입력해주세요.'}
+                    value={project.when}
+                    onChange={(e) => onChangeData(e, 'when')}
+                />
+                <div style={{height: 20}}></div>
+                <TextField
+                    title="content"
+                    label="장소"
+                    placeholder={'장소를 입력해주세요.'}
+                    value={project.location}
+                    onChange={(e) => onChangeData(e, 'location')}
+                />
+                <div style={{height: 20}}></div>
+                <TextField
+                    title="content"
+                    label="주최/주관"
+                    placeholder={'주최/주관을 입력해주세요.'}
+                    value={project.organizer}
+                    onChange={(e) => onChangeData(e, 'organizer')}
+                />
+                <div style={{height: 20}}></div>
+                <TextField
+                    title="content"
+                    label="운영"
+                    placeholder={'운영 기관을 입력해주세요.'}
+                    value={project.operate ?? ''}
+                    onChange={(e) => onChangeData(e, 'operate')}
+                />
+                <div style={{height: 20}}></div>
+                <TextField
+                    title="content"
+                    label="후원"
+                    placeholder={'후원자 및 기관을 입력해주세요.'}
+                    value={project.support ?? ''}
+                    onChange={(e) => onChangeData(e, 'support')}
+                />
+                <div className="main-image">
+                    <h2>메인 이미지</h2>
+                    <label className="image-button" htmlFor="main-image-button">
+                        <input style={{ display: "none" }} ref={mainImageRef} onChange={onChangeMainImage} type="file" accept="image/*" id="main-image-button" />
+                        <span>메인 이미지 등록</span>
+                    </label>
+                    {project.images.length ? (
+                        project.images[0].list_order ? <div className="main-image-skeleton"></div> : <div className="main-image-skeleton">
+                        <div className="remove" onClick={onClickRemoveMainImage}>
+                            <HighlightOffIcon fontSize="large" />
+                        </div>
+                        <img src={project.images[0].file ? project.images[0].key : CLOUD_FRONT + project.images[0].key}/>
                     </div>
-                    <div className="sub-image">
-
-                    </div>
-                </Fragment> :
-                <Fragment>
-                    <div className="title">
-                        <FormControl className="category">
-                            <InputLabel id="category">타입</InputLabel>
-                            <Select
-                                labelId="category"
-                                label="타입"
-                                value={project.type_idx}
-                                onChange={onChangeType}
-                            >
-                                {data?.types.map((ca, key) => <MenuItem key={key} value={ca.idx}>{ca.name}</MenuItem>)}
-                            </Select>
-                        </FormControl>
-                        <TextField
-                            fullWidth
-                            placeholder={'제목을 입력해주세요.'}
-                            label="제목"
-                            value={project.title}
-                            onChange={(e) => onChangeData(e, 'title')}
-                        />
-                    </div>
-                    <TextField
-                        title="content"
-                        label="부 제목"
-                        placeholder={'부 제목을 입력해주세요.'}
-                        value={project.sub_title}
-                        onChange={(e) => onChangeData(e, 'sub_title')}
-                    />
-                    <div style={{height: 20}}></div>
-                    <TextField
-                        title="content"
-                        label="일시"
-                        placeholder={'일시를 입력해주세요.'}
-                        value={project.when}
-                        onChange={(e) => onChangeData(e, 'when')}
-                    />
-                    <div style={{height: 20}}></div>
-                    <TextField
-                        title="content"
-                        label="장소"
-                        placeholder={'장소를 입력해주세요.'}
-                        value={project.location}
-                        onChange={(e) => onChangeData(e, 'location')}
-                    />
-                    <div style={{height: 20}}></div>
-                    <TextField
-                        title="content"
-                        label="주최/주관"
-                        placeholder={'주최/주관을 입력해주세요.'}
-                        value={project.organizer}
-                        onChange={(e) => onChangeData(e, 'organizer')}
-                    />
-                    <div style={{height: 20}}></div>
-                    <TextField
-                        title="content"
-                        label="운영"
-                        placeholder={'운영 기관을 입력해주세요.'}
-                        value={project.operate ?? ''}
-                        onChange={(e) => onChangeData(e, 'operate')}
-                    />
-                    <div style={{height: 20}}></div>
-                    <TextField
-                        title="content"
-                        label="후원"
-                        placeholder={'후원자 및 기관을 입력해주세요.'}
-                        value={project.support ?? ''}
-                        onChange={(e) => onChangeData(e, 'support')}
-                    />
-                </Fragment>
-                }
+                    ) : <div className="main-image-skeleton"></div>}
+                </div>
+                <div className="sub-image">
+                    <h2>서브 이미지</h2>
+                    <label className="image-button" htmlFor="sub-image-button">
+                        <input style={{ display: "none" }} ref={subImageRef} onChange={onChangeSubImage} multiple type="file" accept="image/*" id="sub-image-button" />
+                        <span>서브 이미지 등록</span>
+                    </label>
+                        {project.images.filter(img => img.list_order !== 0).length ?
+                            <PicSortComponent
+                                images={project.images.filter(img => img.list_order !== 0)}
+                                onSortEnd={onSortEnd}
+                                onDelete={onClickRemoveSubImage}
+                            />
+                            // project.images.map((row, index) => {
+                            //     if(!row.list_order) {
+                            //         return <Fragment key={index}/>
+                            //     }
+                            //     return <div className="sub-image-item" key={index}>
+                            //         <img src={row.file ? row.key : CLOUD_FRONT + row.key} />
+                            //         <div className="remove" onClick={() => onClickRemoveSubImage(index)}>
+                            //             <HighlightOffIcon fontSize="large" />
+                            //         </div>
+                            //     </div>
+                            // })
+                            : <div className="sub-image-row"><div className="sub-image-skeleton"/></div>
+                        }
+                </div>
             </div>
-            {step ? <div>12313</div> : <Fragment>
-                {project.idx === -1 ?
-                    <Button className="n-btn" size="large" variant="contained" onClick={onClickSubmit}>{loading ? <CircularProgress size={24} style={{ color: 'white' }} /> : '등록'}</Button>
-                    :
-                    <Button className="n-btn" size="large" variant="contained" onClick={onClickSubmit}>{loading ? <CircularProgress size={24} style={{ color: 'white' }} /> : '수정'}</Button>
-                }    
-            </Fragment>}
-            
-
+            <Button className="n-btn" size="large" variant="contained" onClick={onClickSubmit}>{loading ? <CircularProgress size={24} style={{ color: 'white' }} /> : (project.idx ? '수정': '등록')}</Button>
         </ProjectsContainer>
-        <Snackbar anchorOrigin={{ vertical: snack.vertical, horizontal: snack.horizontal }} open={snack.open} onClose={handleSnackClose} message={snack.message} key={snack.vertical + snack.horizontal} sx={snack.sx} />
+        <Snackbar autoHideDuration={autoHideDuration} anchorOrigin={{ vertical: snack.vertical, horizontal: snack.horizontal }} open={snack.open} onClose={handleSnackClose} message={snack.message} key={snack.vertical + snack.horizontal} sx={snack.sx} />
     </div>
 }
 
