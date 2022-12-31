@@ -18,39 +18,38 @@ const menus: Array<IMenu> = [
     { name: 'NO' },
     { name: '타입' },
     { name: '제목' },
+    { name: '부제목' },
     { name: '작성일' },
     { name: '' },
 ]
 
-interface INews {
+interface IProject {
     idx: number
-    category: string
+    type: ITypes
     title: string
-    views: number
+    sub_title: string
     created_at: Date
 }
 
-interface INewsData {
-    list: Array<INews>
-    total_count: number
-}
-
-interface IProps {
-    data: INewsData | undefined
+interface ITypes {
+    idx: number
+    name: string
 }
 
 const gquery = `
-    query fetchNews($keyword: String, $page: Int) {
-        fetchNews(keyword: $keyword, page: $page) {
+    query fetchProjects($page: Int) {
+        fetchProjects(page: $page) {
             status
             data {
                 list {
                     idx
-                    category
+                    type {
+                        idx
+                        name
+                    }
                     title
-                    views
-                    created_at
-                },
+                    sub_title
+                }
                 total_count
             }
             token
@@ -74,13 +73,13 @@ const ProjectsScreen = () => {
     const [loading, setLoading] = useState(false)
     const [page, setPage] = useState(0)
     const [totalCount, setTotalCount] = useState(0)
-    const [list, setList] = useState<Array<INews>>([])
+    const [list, setList] = useState<Array<IProject>>([])
 
     useEffect(() => {
-        fetchNews(0)
+        fetchProejcts(0)
     }, [])
 
-    const fetchNews = async (newPage: number) => {
+    const fetchProejcts = async (newPage: number) => {
         if (loading) {
             return
         }
@@ -107,8 +106,44 @@ const ProjectsScreen = () => {
     const [deleteIndex, setDeleteIndex] = useState(-1)
 
     const onClickDelete = async () => {
-        try {
+        if(deleteIndex < 0) {
+            return
+        }
+        const dquery = `
+            mutation deleteProject($idx: Int!) {
+                deleteProject(idx: $idx) {
+                    status
+                    token
+                    error {
+                        remark
+                        code
+                        text
+                    }
+                }
+            }
+        `;
 
+        const delQuery = gql`
+                ${dquery}
+            `
+        const inQuery = delQuery.definitions[0] as OperationDefinitionNode;
+        const { value } = inQuery.name as NameNode;
+        try {
+            const { data } = await axiosInstance(value)
+                .post(`${GQL_DOMAIN}`, {
+                    query: dquery,
+                    variables: {
+                        idx: deleteIndex,
+                    }
+                })
+             
+            if(data.data[value].status === 200) {
+                const remove = list.filter((item) => item.idx !== deleteIndex)
+                setDeleteIndex(-1)
+                setList([
+                    ...remove
+                ])
+            }
         } catch (e) {
 
         }
@@ -138,10 +173,13 @@ const ProjectsScreen = () => {
                             {row.idx}
                         </TableCell>
                         <TableCell>
-                            {row.category}
+                            {row.type.name}
                         </TableCell>
                         <TableCell>
                             {row.title}
+                        </TableCell>
+                        <TableCell>
+                            {row.sub_title}
                         </TableCell>
                         <TableCell>
                             {moment(row.created_at).format('YYYY-MM-DD')}
@@ -158,7 +196,7 @@ const ProjectsScreen = () => {
                 </TableBody>
             </Table>
             <NPaginationContainer>
-                <Pagination page={page + 1} count={totalCount} variant="outlined" shape="rounded" onChange={(e, page) => fetchNews(page - 1)} />
+                <Pagination page={page + 1} count={totalCount} variant="outlined" shape="rounded" onChange={(e, page) => fetchProejcts(page - 1)} />
             </NPaginationContainer>
         </ProjectsContainer >
         <Dialog
@@ -166,11 +204,11 @@ const ProjectsScreen = () => {
             onClose={() => setDeleteIndex(-1)}
         >
             <DialogContent>
-                뉴스를 삭제하시겠어요?
+                프로젝트를 삭제하시겠어요?
             </DialogContent>
             <DialogActions>
-                <Button variant="outlined">아니오</Button>
-                <Button variant="contained">예</Button>
+                <Button variant="outlined" onClick={() => setDeleteIndex(-1)}>아니오</Button>
+                <Button variant="contained" onClick={onClickDelete}>예</Button>
             </DialogActions>
         </Dialog>
     </div >

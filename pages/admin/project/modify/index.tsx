@@ -56,13 +56,23 @@ export const getServerSideProps = async ({ query = { idx: null }, params = {} })
                     idx: Number(query.idx)
                 }
             })
+        if(data.data[value].status === 200) {
+            return {
+                props: {
+                    query,
+                    params,
+                    data: data.data[value].data
+                },
+            };
+        }
+
         return {
             props: {
                 query,
                 params,
-                data: data.data[value].data
             },
         };
+        
     } catch (e) {
         return {
             props: {

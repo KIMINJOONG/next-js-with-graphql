@@ -107,8 +107,44 @@ const NewsScreen = () => {
     const [deleteIndex, setDeleteIndex] = useState(-1)
 
     const onClickDelete = async () => {
-        try {
+        if(deleteIndex < 0) {
+            return
+        }
+        const dquery = `
+            mutation deleteNews($idx: Int!) {
+                deleteNews(idx: $idx) {
+                    status
+                    token
+                    error {
+                        remark
+                        code
+                        text
+                    }
+                }
+            }
+        `;
 
+        const delQuery = gql`
+                ${dquery}
+            `
+        const inQuery = delQuery.definitions[0] as OperationDefinitionNode;
+        const { value } = inQuery.name as NameNode;
+        try {
+            const { data } = await axiosInstance(value)
+                .post(`${GQL_DOMAIN}`, {
+                    query: dquery,
+                    variables: {
+                        idx: deleteIndex,
+                    }
+                })
+             
+            if(data.data[value].status === 200) {
+                const remove = list.filter((item) => item.idx !== deleteIndex)
+                setDeleteIndex(-1)
+                setList([
+                    ...remove
+                ])
+            }
         } catch (e) {
 
         }
@@ -169,8 +205,8 @@ const NewsScreen = () => {
                 뉴스를 삭제하시겠어요?
             </DialogContent>
             <DialogActions>
-                <Button variant="outlined">아니오</Button>
-                <Button variant="contained">예</Button>
+                <Button variant="outlined" onClick={() => setDeleteIndex(-1)}>아니오</Button>
+                <Button variant="contained" onClick={onClickDelete}>예</Button>
             </DialogActions>
         </Dialog>
     </div >

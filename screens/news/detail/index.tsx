@@ -1,7 +1,7 @@
 import Footer from "components/Footer"
 import Header from "components/Header"
 import HeadMeta from "components/Header/HeadMeta"
-import { Fragment } from "react"
+import { Fragment, useEffect } from "react"
 import { DetailContainer } from "./style"
 import { Button } from "@mui/material";
 import { useRouter } from "next/router"
@@ -20,10 +20,17 @@ interface IProps {
     data?: INews
 }
 
+// url 정규식
+const rUrlRegex = /(?:(?:(https?|ftp|telnet):\/\/|[\s\t\r\n\[\]\`\<\>\"\'])((?:[\w$\-_\.+!*\'\(\),]|%[0-9a-f][0-9a-f])*\:(?:[\w$\-_\.+!*\'\(\),;\?&=]|%[0-9a-f][0-9a-f])+\@)?(?:((?:(?:[a-z0-9\-가-힣]+\.)+[a-z0-9\-]{2,})|(?:[\d]{1,3}\.){3}[\d]{1,3})|localhost)(?:\:([0-9]+))?((?:\/(?:[\w$\-_\.+!*\'\(\),;:@&=ㄱ-ㅎㅏ-ㅣ가-힣]|%[0-9a-f][0-9a-f])+)*)(?:\/([^\s\/\?\.:<>|#]*(?:\.[^\s\/\?:<>|#]+)*))?(\/?[\?;](?:[a-z0-9\-]+(?:=[^\s:&<>]*)?\&)*[a-z0-9\-]+(?:=[^\s:&<>]*)?)?(#[\w\-]+)?)/gmi;
+
 const NewsDetail = ({ data }: IProps) => {
     if(!data) {
         return <Error statusCode={404}/>
     }
+
+    // useEffect(() => {
+    //     console.log((data.content + '\nasdf').match(rUrlRegex))
+    // }, [])
     const router = useRouter()
     return <Fragment>
         <HeadMeta title={`나빌레라 : ${data?.title}`} />

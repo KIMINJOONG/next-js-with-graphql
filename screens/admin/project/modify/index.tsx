@@ -13,6 +13,7 @@ import { autoHideDuration } from "constants/size";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import PicSortComponent from "components/Sort";
 import { arrayMoveMutable } from 'array-move';
+import Error from "next/error";
 
 interface ITypes {
     idx: number
@@ -115,6 +116,9 @@ const readFileAsync = (file: File) => {
 
 const ProjectModifyScreen = ({ data }: IProps) => {
     const router = useRouter()
+    if(router.query.idx && !data) {
+        return <Error statusCode={404}/>
+    }
     const [step, setStep] = useState(0)
     const [loading, setLoading] = useState(false)
     const [project, setProject] = useState<IProject>(data?.project ?? {
@@ -233,20 +237,23 @@ const ProjectModifyScreen = ({ data }: IProps) => {
                     }
                 })
 
-            const result = data.data[value].data
-            setProject({
-                ...project,
-                ...result
-            })
-            if (project.idx) {
-                openSnack('프로젝트 수정 완료')
+            const result = data.data[value]
+            if(result.status === 200) {
+                setProject({
+                    ...project,
+                    ...result.data
+                })
+                if (project.idx) {
+                    openSnack('프로젝트 수정 완료')
+                } else {
+                    router.replace(`/admin/project/modify?idx=${result.idx}`)
+                    openSnack('프로젝트 생성 완료')
+                }
             } else {
-                router.replace(`/admin/project/modify?idx=${result.idx}`)
-                openSnack('프로젝트 생성 완료')
+                openSnack('프로젝트 생성중 오류 발생')
             }
-            setStep(1)
+            
         } catch (e) {
-            console.log(e)
             openSnack('프로젝트 생성중 오류 발생')
         }
         setLoading(false)
@@ -285,7 +292,7 @@ const ProjectModifyScreen = ({ data }: IProps) => {
               const result = await readFileAsync(file);
               return {
                 key: result?.toString(),
-                list_order: project.images.length + i,
+                list_order: project.images.length === 0 ? 1 + i : project.images.length + i,
                 file
               };
             })
