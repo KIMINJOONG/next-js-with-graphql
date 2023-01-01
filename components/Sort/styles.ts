@@ -1,13 +1,20 @@
 import styled from "styled-components";
 import { color, media } from "styles/theme";
 
+interface IImgSize {
+    width?: number
+    mwidth?: number
+    height?: number
+    mheight?: number
+}
+
 export const StyledImg = styled.img`
-    min-width: 153px;
-    height: 114px;
+    min-width: ${props => props.width ? `${props.width}px` : '153px'};
+    height: ${props => props.height ? `${props.height}px` : '114px'};
     object-fit: cover;
     ${media.tablet} {
-        min-width: 171px;
-        height: 128px;
+        min-width: ${(props: IImgSize) => props.mwidth ? `${props.mwidth}px` : '171px'};
+        height: ${(props: IImgSize) => props.mheight ? `${props.mheight}px` : '128px'};
     }
 `
 
@@ -15,12 +22,12 @@ export const StyledItem = styled.div`
     position: relative;
     margin-right: 10px;
     border: 5px dashed ${color.N25};
-    width: 163px;
-    height: 124px;
+    width: ${(props: IImgSize) => props.width ? `${props.width + 10}px` : '163px'};
+    height: ${(props: IImgSize) => props.height ? `${props.height + 10}px` : '124px'};
     border-radius: 10px;
     ${media.tablet} {
-        width: 181px;
-        height: 138px;
+        width: ${(props: IImgSize) => props.mwidth ? `${props.mwidth + 10}px` : '181px'};
+        height: ${(props: IImgSize) => props.mheight ? `${props.mheight + 10}px` : '138px'};
     }
 `
 

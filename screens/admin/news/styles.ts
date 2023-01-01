@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { media, size } from "styles/theme";
+import { color, media, size } from "styles/theme";
 
 export const NewsContainer = styled.div`
     max-width: ${size.container}px;
@@ -26,6 +26,25 @@ export const NewsContainer = styled.div`
                 width: 180px;
                 margin-right: 20px;
             }
+        }
+        .image-button {
+            span {
+                display: inline-block;
+                padding: 8px 22px;
+                background: ${color.brand};
+                border-radius: 4px;
+                color: white;
+                cursor: pointer;
+            }
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .image-skeleton {
+            position: relative;
+            border: 5px dashed ${color.N25};
+            height: 409px;
+            width: 297px;
+            border-radius: 10px;
         }
     }
     .n-btn {

@@ -57,6 +57,10 @@ export const DetailContainer = styled.div`
             .content-margin {
                 margin-top: 46px;
                 margin-bottom: 33px;
+                a {
+                    color: ${color.second};
+                    text-decoration: underline;
+                }
             }
             white-space: pre-wrap;
         }

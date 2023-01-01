@@ -20,6 +20,11 @@ export const getServerSideProps = async ({ query = { idx: null }, params = {} })
                             title
                             content
                             created_at
+                            images {
+                                idx
+                                key
+                                list_order
+                            }
                         }
                     }
                     token

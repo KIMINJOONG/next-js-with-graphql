@@ -1,12 +1,13 @@
 import Footer from "components/Footer"
 import Header from "components/Header"
 import HeadMeta from "components/Header/HeadMeta"
-import { Fragment, useEffect } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { DetailContainer } from "./style"
 import { Button } from "@mui/material";
 import { useRouter } from "next/router"
 import Error from "next/error"
 import moment from "moment"
+import { CLOUD_FRONT } from "assets/utils/ENV"
 
 interface INews {
     idx: number
@@ -14,6 +15,13 @@ interface INews {
     title: string
     content: string
     created_at: Date
+    images: Array<INewsImage>
+}
+
+interface INewsImage {
+    idx: number
+    key: string
+    list_order: number
 }
 
 interface IProps {
@@ -28,9 +36,19 @@ const NewsDetail = ({ data }: IProps) => {
         return <Error statusCode={404}/>
     }
 
-    // useEffect(() => {
-    //     console.log((data.content + '\nasdf').match(rUrlRegex))
-    // }, [])
+    const [news, setNews] = useState(data)
+
+    useEffect(() => {
+        const hrefList = data.content.match(rUrlRegex)
+        let replaceStr = news.content
+        hrefList?.forEach(li => {
+            replaceStr = news.content.replaceAll(li, `<a href="${li}" target="_blank">${li}</a>`)
+        })
+        setNews({
+            ...news,
+            content: replaceStr
+        })
+    }, [])
     const router = useRouter()
     return <Fragment>
         <HeadMeta title={`나빌레라 : ${data?.title}`} />
@@ -49,8 +67,15 @@ const NewsDetail = ({ data }: IProps) => {
                         {moment(data.created_at).format('YYYY-MM-DD')}
                     </p>
                 </div>
+                {news.images.map((img, idx) => {
+                    if(idx === news.images.length - 1) {
+                        return <div key={idx} style={{textAlign:'center'}}><img style={{marginTop: 40, marginBottom: 40}} src={CLOUD_FRONT + img.key}/></div>
+                    }
+                    return <div key={idx} style={{textAlign:'center'}}><img style={{marginTop: 40}} src={CLOUD_FRONT + img.key}/></div>
+                })}
                 <div className="content-item">
-                    <div className="content-margin">{data.content}</div>
+                    <div className="content-margin" dangerouslySetInnerHTML={ {__html: news.content} } />
+                    {/* <div className="content-margin">{news.content}</div> */}
                 </div>
             </div>
             <div className="button-area">

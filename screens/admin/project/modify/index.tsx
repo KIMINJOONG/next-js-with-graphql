@@ -55,7 +55,6 @@ interface ISignedData {
     url: string
     key: string
     list_order: number
-
 }
 
 // modifiyNews(idx: Int, category_idx: Int! title: String!, content: String!
@@ -82,8 +81,8 @@ const gqlQuery = gql`
         `
 
 const preSignedQuery = `
-    query preSignedQuery($exts: [ExtInput]) {
-        preSignedQuery(exts: $exts) {
+    query preSignedQuery($exts: [ExtInput], $type: String) {
+        preSignedQuery(exts: $exts, type: $type) {
             status
             token
             data {
@@ -119,7 +118,6 @@ const ProjectModifyScreen = ({ data }: IProps) => {
     if(router.query.idx && !data) {
         return <Error statusCode={404}/>
     }
-    const [step, setStep] = useState(0)
     const [loading, setLoading] = useState(false)
     const [project, setProject] = useState<IProject>(data?.project ?? {
         type_idx: 1,
@@ -352,7 +350,7 @@ const ProjectModifyScreen = ({ data }: IProps) => {
             )
             return true
         }catch(e) {
-            console.log(e)
+            
         }
         return false
     }
@@ -495,17 +493,6 @@ const ProjectModifyScreen = ({ data }: IProps) => {
                                 onSortEnd={onSortEnd}
                                 onDelete={onClickRemoveSubImage}
                             />
-                            // project.images.map((row, index) => {
-                            //     if(!row.list_order) {
-                            //         return <Fragment key={index}/>
-                            //     }
-                            //     return <div className="sub-image-item" key={index}>
-                            //         <img src={row.file ? row.key : CLOUD_FRONT + row.key} />
-                            //         <div className="remove" onClick={() => onClickRemoveSubImage(index)}>
-                            //             <HighlightOffIcon fontSize="large" />
-                            //         </div>
-                            //     </div>
-                            // })
                             : <div className="sub-image-row"><div className="sub-image-skeleton"/></div>
                         }
                 </div>
