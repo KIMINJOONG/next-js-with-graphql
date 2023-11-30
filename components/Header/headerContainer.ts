@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {color, media} from 'styles/theme';
 
 interface IProps {
-  type: number;
+  type: number | undefined;
 }
 export const HeaderContainer = styled.nav<IProps>`
   position: fixed;
