@@ -28,7 +28,6 @@ interface IMenu {
 
 const menus: Array<IMenu> = [
   {name: 'NO'},
-  {name: '카테고리'},
   {name: '제목'},
   {name: '작성일'},
   {name: ''},

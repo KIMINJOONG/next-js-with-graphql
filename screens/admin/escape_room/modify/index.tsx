@@ -322,6 +322,9 @@ const EscapeRoomModifyScreen = ({data}: IProps) => {
     }
 
     if (escapeRoom.mainImage) {
+      if (!escapeRoom.mainImage.file) {
+        return true;
+      }
       const name = escapeRoom.mainImage.file!.name;
       const lastDot = name.lastIndexOf('.');
       const ext = name.substring(lastDot + 1);
