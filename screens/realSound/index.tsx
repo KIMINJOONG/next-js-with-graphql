@@ -21,7 +21,7 @@ const RealSoundScreen = () => {
   return (
     <div>
       <HeadMeta title={`나빌레라 : 실감형 사운드`} />
-      <Header type={2} />
+      <Header type={5} />
       <RealSoundContainer>
         <RealSoundBodyFirstContainer>
           <div style={{flex: 1, border: '1px solid white'}}>

@@ -61,7 +61,7 @@ const Header = (props: IHeader) => {
 
   return (
     <Fragment>
-      <HeaderContainer>
+      <HeaderContainer type={props.type}>
         <div className="header-inner">
           <div className="header-sub">
             <Link href={'/'}>
